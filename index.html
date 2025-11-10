@@ -287,15 +287,15 @@
             width: 100%;
         }
 
-        /* Filtros do Mapa */
+        /* Filtros do Mapa - POSICIONAMENTO CORRIGIDO */
         .map-filters {
             position: absolute;
-            top: 20px;
+            top: 80px; /* Posicionado abaixo do cabeçalho */
             left: 20px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
+            z-index: 999; /* Z-index menor que o header */
             min-width: 200px;
             padding: 15px;
         }
@@ -368,14 +368,15 @@
             color: white;
         }
 
+        /* Legenda do Mapa - POSICIONAMENTO CORRIGIDO */
         .map-overlay {
             position: absolute;
-            top: 20px;
+            top: 80px; /* Posicionado abaixo do cabeçalho */
             right: 20px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
+            z-index: 999; /* Z-index menor que o header */
             min-width: 200px;
         }
 
@@ -894,7 +895,7 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="#sobre">saiba mais sobre</a></li>
+                    <li><a href="#sobre">saiba mais</a></li>
                     <li><a href="#map">Mapa Interativo</a></li>
                     <li><a href="#features">Recursos</a></li>
                     <li><a href="#stratigraphy">Estratigrafia</a></li>
@@ -1054,7 +1055,7 @@
             <div class="map-container">
                 <div id="archaeologicalMap"></div>
                 
-                <!-- Filtros do Mapa -->
+                <!-- Filtros do Mapa - POSICIONAMENTO CORRIGIDO -->
                 <div class="map-filters">
                     <div class="filter-header">
                       <h3><i class="fas fa-filter"></i> Filtros</h3>
@@ -1091,7 +1092,7 @@
                     </div>
                 </div>
                 
-                <!-- Legenda do Mapa -->
+                <!-- Legenda do Mapa - POSICIONAMENTO CORRIGIDO -->
                 <div class="map-overlay">
                     <div class="legend-header">
                       <h3><i class="fas fa-layer-group"></i> Legenda do Mapa</h3>
@@ -1100,27 +1101,27 @@
 
                     <div class="map-legend" id="legendContent">
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #ff0400;"></div>
+                            <div class="legend-color" style="background-color: #e74c3c;"></div>
                             <span>Sítio em Escavação</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #0022ff;"></div>
+                            <div class="legend-color" style="background-color: #3498db;"></div>
                             <span>Sítio Documentado</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #00ff0d;"></div>
+                            <div class="legend-color" style="background-color: #2ecc71;"></div>
                             <span>Área Protegida</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #ffb52c;"></div>
+                            <div class="legend-color" style="background-color: #f39c12;"></div>
                             <span>Artefato Registrado</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #c800ff;"></div>
+                            <div class="legend-color" style="background-color: #9b59b6;"></div>
                             <span>Estrutura Arqueológica</span>
                         </div>
                         <div class="legend-item">
-                            <div class="legend-color" style="background-color: #ffff00;"></div>
+                            <div class="legend-color" style="background-color: #f1c40f;"></div>
                             <span>Museus Arqueológicos</span>
                         </div>
                     </div>
@@ -1224,1347 +1225,1346 @@
 
         // Dados COMPLETOS dos sites originais - TODOS RESTAURADOS
         const sites = [
-            {
-                id: 'site-01',
-                name: 'Lapa do Santo',
-                coords: [-19.605, -44.000],
-                type: 'Sítio em Escavação',
-                period: 'Holoceno Inicial',
-                status: 'Documentado',
-                artifacts: 800,
-                color: '#ff0400',
-                image: 'fotos/isblog05.jpg'
-            },
-            {
-                id: 'site-02',
-                name: 'Caverna da Pedra Pintada',
-                coords: [-1.99768, -54.07239], 
-                type: 'Sítio Documentado',
-                period: 'Pleistoceno–Holoceno',
-                status: 'Documentado',
-                artifacts: 42,
-                image: 'fotos/6b242fff068c7c41102b319c37e38ab374e70375.jpg',
-                color: '#0022ff'
-            },
-            {
-                id: 'site-03',
-                name: 'Sambaqui do Moa',
-                coords: [-22.9667, -42.0333], 
-                type: 'Área Protegida',
-                period: 'Holoceno Médio',
-                status: 'Protegido',
-                artifacts: 356,
-                image: 'fotos/image032.jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'site-04',
-                name: 'Terra Preta do Índio',
-                coords: [-3.1667, -60.0167], 
-                type: 'Sítio Documentado',
-                period: 'Holoceno Tardio',
-                status: 'Documentado',
-                artifacts: 215,
-                image: 'fotos/24RA542.jpg',
-                color: '#0022ff'
-            },
-            {
-                id: 'site-05',
-                name: 'Serra da Capivara',
-                coords: [-8.8371, -42.5636],
-                type: 'Área Protegida',
-                period: 'Pleistoceno–Holoceno',
-                status: 'Patrimônio Mundial',
-                artifacts: 1200,
-                image: 'fotos/serradacapivara-vidasemparedes-33-1024x576.webp',
-                color: '#00ff0d'
-            },
-            {
-                id: 'site-06',
-                name: 'Museu de Arqueologia Bíblica - (MAB/UNASP)',
-                coords: [-22.5011, -47.1651],
-                type: 'Museus Arqueológicos',
-                period: 'Contemporâneo',
-                status: 'Ativo',
-                artifacts: 150,
-                color: '#ffff00',
-                siteUrl: 'https://tour.unasp.edu.br/mab',
-                image: 'fotos/images (1).jpg'
-            },
-            {
-                id: 'site-07',
-                name: 'Universidade de São Paulo – Museu de Arqueologia e Etnologia (MAE/USP)',
-                coords: [-23.561399, -46.730789], 
-                type: 'Museus Arqueológicos',
-                period: 'Pré-colonial a Contemporâneo',
-                status: 'Ativo',
-                artifacts: 150,
-                color: '#ffff00',
-                image: 'fotos/12DC341.jpg',
-                siteUrl: 'USP.html'
-            },
-            {
-                id: 'site-08',
-                name: 'Museu de Arqueologia e Etnologia (MAE/UFBA)',
-                coords: [-12.972771, -38.510216], 
-                type: 'Museus Arqueológicos',
-                period: 'Pré-colonial, colonial e contemporâneo',
-                status: 'Ativo',
-                artifacts: 200,
-                image: 'fotos/images (2).jpg', 
-                color: '#ffff00'
-            },
-            {
-                id: 'artefato-02',
-                name: 'Capacete celta de bronze',
-                coords: [52.400, 21.150],
-                type: 'Artefato Registrado',
-                period: 'Idade do Ferro',
-                status: 'Achado isolado em área rural',
-                artifacts: 200,
-                site: 'Desconhecido (fora de sítio celta)',
-                image: 'fotos/Celtic_-_Helmet_Italo-Celtic_3rd_century_BC_(bronze)_-_(MeisterDrucke-241460).jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-03',
-                name: 'Fragmento cerâmico Tupi',
-                coords: [-16.0056, -51.3971],
-                type: 'Artefato Registrado',
-                period: 'Pré-colonial',
-                status: 'Disperso em área agrícola',
-                site: 'Montes Claros de Goiás',
-                artifacts: 200,
-                image: 'fotos/fragmentos.jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-04',
-                name: 'Lesma lítica (Tradição Itaparica)',
-                coords: [-10.000, -56.000],
-                type: 'Artefato Registrado',
-                period: 'Pré-cerâmica',
-                status: 'Encontrado fora de abrigo',
-                site: 'Tradição Itaparica',
-                artifacts: 200,
-                image: 'fotos/images (3).jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-05',
-                name: 'Machado polido isolado',
-                coords: [-19.630, -43.882],
-                type: 'Artefato Registrado',
-                period: 'Holoceno Médio',
-                status: 'Fora de contexto',
-                site: 'Região de Lagoa Santa',
-                artifacts: 200,
-                image: 'fotos/463-1.jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-06',
-                name: 'Estatueta romana em mármore',
-                coords: [41.9028, 12.4964],
-                type: 'Artefato Registrado',
-                period: 'Império Romano',
-                status: 'Recuperado em mercado ilegal',
-                site: 'Origem incerta',
-                artifacts: 200,
-                image: 'fotos/ah-padrao-2024-10-18t125446055.jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-07',
-                name: 'Cerâmica Marajoara',
-                coords: [-9.9085, -64.3050],
-                type: 'Artefato Registrado',
-                period: 'Pré-colombiano',
-                status: 'Encontrada fora de sítio',
-                site: 'Região do Rio Madeira',
-                artifacts: 200,
-                image: 'fotos/Cylindrical_vessel_Collection_H_Law_170_n2.jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-08',
-                name: 'Pontas de flecha tupinambá',
-                coords: [-23.5505, -46.6333],
-                type: 'Artefato Registrado',
-                period: 'Pré-colonial',
-                status: 'Disperso em área florestal',
-                site: 'Mata Atlântica',
-                artifacts: 200,
-                image: 'fotos/Fleche_Cartailhac_MHNT_PRE_2009.0.232.2_simple (1).jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'artefato-09',
-                name: 'Fóssil de Luzia',
-                coords: [-19.9317, -43.9408],
-                type: 'Artefato Registrado',
-                period: 'Pleistoceno final (cerca de 11.500 anos)',
-                status: 'Parcialmente preservado após incêndio',
-                site: 'Lapa Vermelha, Pedro Leopoldo - MG',
-                artifacts: 200,
-                image: 'fotos/cranio_de_luzia.jpg',
-                color: '#ffb52c'
-            },
-            {
-                id: 'area-01',
-                name: 'Parque Nacional da Tijuca',
-                coords: [-22.9485, -43.2343],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Mata Atlântica',
-                artifacts: 850,
-                image: 'fotos/images (4).jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-02',
-                name: 'Reserva Biológica de Sooretama',
-                coords: [-19.0892, -40.3150],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Mata Atlântica',
-                artifacts: 400,
-                image: 'fotos/ipatrimonio-Sooretama-Reserva-Biologica-de-Sooretama-Imagem-ICMBio.jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-03',
-                name: 'Parque Nacional do Pico da Neblina',
-                coords: [0.8173, -66.5600],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Amazônia',
-                artifacts: 1200,
-                image: 'fotos/Pico_da_Neblina.jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-05',
-                name: 'Reserva Extrativista Marinha do Marajó',
-                coords: [-0.9847, -49.6663],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Amazônia',
-                artifacts: 600,
-                image: 'fotos/images (5).jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-06',
-                name: 'Floresta Nacional do Tapajós',
-                coords: [-3.4766, -57.1181],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Amazônia',
-                artifacts: 1100,
-                image: 'fotos/images (6).jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-07',
-                name: 'Parque Indígena do Xingu',
-                coords: [-12.5000, -52.5000],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Cerrado / Amazônia',
-                artifacts: 1300,
-                image: 'fotos/1.jpeg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'area-08',
-                name: 'Parque Nacional da Chapada Diamantina',
-                coords: [-12.5000, -41.4500],
-                type: 'Área Protegida',
-                status: 'Protegida',
-                biome: 'Caatinga / Mata Atlântica',
-                artifacts: 700,
-                image: 'fotos/Desde_o_Morro_do_Pai_Inácio.jpg',
-                color: '#00ff0d'
-            },
-            {
-                id: 'estrut-01',
-                name: 'Templo do Sol (Coricancha)',
-                coords: [-13.5181, -71.9786],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas preservadas',
-                description: 'Templo solar principal do Império Inca, base de construções posteriores.',
-                artifacts: 450,
-                image: 'fotos/images (7).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-02',
-                name: 'Pirâmide do Sol',
-                coords: [19.6925, -98.8438],
-                type: 'Estrutura Arqueológica',
-                status: 'Conservada',
-                description: 'Uma das maiores pirâmides da América pré-colombiana, centro cerimonial.',
-                artifacts: 1200,
-                image: 'fotos/images (9).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-03',
-                name: 'Templo de Ártemis',
-                coords: [37.9582, 27.3642],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas fragmentadas',
-                description: 'Construído em homenagem à deusa Ártemis, foi uma das Sete Maravilhas do Mundo Antigo, destruído por um incêndio e saqueado.',
-                artifacts: 120,
-                image: 'fotos/images (16).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-04',
-                name: 'Palácio de Knossos',
-                coords: [35.2989, 25.1648],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Complexo palaciano da civilização minoana, com frescos e arquitetura sofisticada.',
-                artifacts: 600,
-                image: 'fotos/images (8).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-05',
-                name: 'Muralhas de Chan Chan',
-                coords: [-8.1120, -79.0330],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Ruínas de antiga capital Chimú, com grandes muralhas e palácios.',
-                artifacts: 900,
-                image: 'fotos/istockphoto-498796572-612x612.jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-06',
-                name: 'Templo de Kukulkán (El Castillo)',
-                coords: [20.6829, -88.5698],
-                type: 'Estrutura Arqueológica',
-                status: 'Preservada',
-                description: 'Pirâmide escalonada dedicada ao deus Kukulkán, famosa por seu alinhamento astronômico.',
-                artifacts: 1000,
-                image: 'fotos/images (10).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-07',
-                name: 'Templo de Hathor',
-                coords: [25.7403, 32.6014],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Templo dedicado à deusa Hathor, com relevos e arquitetura bem preservada.',
-                artifacts: 700,
-                image: 'fotos/images (11).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-08',
-                name: 'Ruínas da Igreja de São Miguel das Missões',
-                coords: [-27.4941, -54.5810],
-                type: 'Estrutura Arqueológica',
-                status: 'Parcialmente preservada',
-                description: 'Igreja da missão jesuítica do século XVIII, importante para a história colonial.',
-                artifacts: 350,
-                image: 'fotos/images (12).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-09',
-                name: 'Pirâmide de Cochasquí',
-                coords: [-0.0055, -78.4098],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Complexo arqueológico com pirâmides truncadas e plataformas cerimoniais.',
-                artifacts: 500,
-                image: 'fotos/Foto-142-Piramide-de-Cochasqui.jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-10',
-                name: 'Fortaleza de Sacsayhuamán',
-                coords: [-13.5090, -71.9817],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Estrutura megalítica com pedras encaixadas com precisão incrível.',
-                artifacts: 800,
-                image: 'fotos/images (13).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-11',
-                name: 'Templo de Kalasasaya',
-                coords: [-16.5613, -68.6537],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas',
-                description: 'Grande templo cerimonial com estruturas de pedra monumental.',
-                artifacts: 650,
-                image: 'fotos/Templo_de_Kalasasaya_a_socha_Monolito_Ponce_-_Tiwanaku_-_panoramio_(1) (1).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'estrut-12',
-                name: 'Mausoléu de Halicarnasso',
-                coords: [37.0379, 27.4241],
-                type: 'Estrutura Arqueológica',
-                status: 'Ruínas parciais',
-                description: 'Uma das Sete Maravilhas do Mundo Antigo, tumba construída para Mausolo, sátrapa da Cária.',
-                artifacts: 150,
-                image: 'fotos/download (2).jpg',
-                color: '#c800ff'
-            },
-            {
-                id: 'escav-01',
-                name: 'Sambaqui do Bacanga',
-                coords: [-2.5333, -44.2833],
-                type: 'Sítio em Escavação',
-                status: 'Em escavação',
-                description: 'Sítio costeiro com conchas, esqueletos humanos e artefatos líticos.',
-                artifacts: 720,
-                image: 'fotos/Figura-6-Escavacao-da-Superficie-Ampla-no-Sambaqui-do-Bacanga.png',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-02',
-                name: 'Sítio Arqueológico do Alto da Estiva',
-                coords: [-7.2306, -35.8811],
-                type: 'Sítio em Escavação',
-                status: 'Escavação em andamento',
-                description: 'Fragmentos cerâmicos, estruturas de ocupação e sepultamentos.',
-                artifacts: 430,
-                image: 'fotos/stioarqueolgicotocadaanta.webp',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-03',
-                name: 'Sítio Furna do Estrago',
-                coords: [-8.2831, -36.0153],
-                type: 'Sítio em Escavação',
-                status: 'Escavação ativa',
-                description: 'Importante para o estudo da transição entre caçadores-coletores e ceramistas.',
-                artifacts: 860,
-                image: 'fotos/images (14).jpg',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-04',
-                name: 'Sítio do Riacho do Meio',
-                coords: [-9.3958, -37.9972],
-                type: 'Sítio em Escavação',
-                status: 'Investigação em curso',
-                description: 'Ocorrência de material lítico e ossadas humanas em bom estado.',
-                artifacts: 390,
-                image: 'fotos/riachodomeio.jpg',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-05',
-                name: 'Sítio Arqueológico Santa Elina',
-                coords: [-15.1333, -59.0833],
-                type: 'Sítio em Escavação',
-                status: 'Escavações recentes',
-                description: 'Possível presença de megafauna associada a humanos.',
-                artifacts: 510,
-                image: 'fotos/Parede_do_Sítio_arqueológico_Santa_Elina.jpg',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-06',
-                name: 'Sítio da Lapa do Boquete',
-                coords: [-14.3206, -43.8456],
-                type: 'Sítio em Escavação',
-                status: 'Escavação ativa',
-                description: 'Sepultamentos com urnas funerárias e ferramentas.',
-                artifacts: 740,
-                image: 'fotos/janelao.jpg',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-07',
-                name: 'Sítio Arqueológico do Vale do Ribeira',
-                coords: [-24.6000, -48.7000],
-                type: 'Sítio em Escavação',
-                status: 'Pesquisas em andamento',
-                description: 'Material ósseo, cerâmico e estruturas rituais pré-coloniais.',
-                artifacts: 620,
-                image: 'fotos/images (15).jpg',
-                color: '#ff0400'
-            },
-            {
-                id: 'escav-08',
-                name: 'Sítio Pedra do Alexandre',
-                coords: [-6.8847, -39.8781],
-                type: 'Sítio em Escavação',
-                status: 'Escavação recente',
-                description: 'Arte rupestre e artefatos associados a rituais.',
-                artifacts: 360,
-                image: 'fotos/Figura-5-Enterramento-15-do-sitio-Pedra-do-Alexandre-Area-Arqueologica-do-Serido (1).png',
-                color: '#ff0400'
-            },
-            // SÍTIOS DO VALE DO PARAÍBA - CIDADES ESPECÍFICAS
-            {
-                id: 'site-sjc-mariana-01',
-    name: 'Sítio Arqueológico Jardim Mariana I - São José dos Campos',
-    coords: [-23.2342, -45.8994],
-    type: 'Sítio de Ocupação Indígena',
-    period: 'Período Pré-Colonial (~400 anos)',
-    culture: 'Tupi-Guarani',
-    status: 'Em Estudo pelo IPHAN',
-    artifacts: 300,
-    description: 'Descoberta acidental em 2021 durante obras. Materiais indicam assentamento indígena com práticas de subsistência e armazenamento.',
-    institution: 'IPHAN / Fundação Cultural Cassiano Ricardo',
-    access: 'Não aberto à visitação pública',
-    color: '#2c5530',
-    image: 'fotos/250478117_4262692817162826_2384230040786853257_n'
-},
-{
-    id: 'site-sjc-cemiterio-01',
-    name: 'Cemitério de Escravos - Chácara dos Franceses',
-    coords: [-23.2189, -45.9028],
-    type: 'Sítio Funerário',
-    period: 'Século XIX',
-    status: 'Escavado e Documentado',
-    description: 'Cemitério de escravos descoberto durante obras, com estudos arqueológicos realizados.',
-    artifacts: 300,
-    institution: 'IPHAN / UNESP',
-    color: '#2F4F4F'
-},
-  
-  {
-    id: "vale-01",
-    name: "Morro Branco",
-    coords: [-11.500, -46.800],
-    type: "Sítio de Coleta",
-    period: "Pré-colonial",
-    status: "Coletou-se numa área",
-    artifacts: 45,
-    site: "Dianópolis - TO",
-    image: "fotos/morro_branco.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-02",
-    name: "Engenho S:CA-ESR I",
-    coords: [-9.500, -48.500],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico de engenho",
-    artifacts: 120,
-    site: "Miracema - TO",
-    image: "fotos/engenho_esr_i.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-03",
-    name: "São Romãc CA-SR II",
-    coords: [-9.500, -48.500],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico de engenho",
-    artifacts: 95,
-    site: "Miracema - TO",
-    image: "fotos/sao_roma_ii.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-04",
-    name: "Fazenda Olho D'água",
-    coords: [-11.500, -46.800],
-    type: "Sítio Cerâmico",
-    period: "Pré-colonial",
-    status: "Ponto provável - cerâmico",
-    artifacts: 80,
-    site: "Dianópolis - TO",
-    image: "fotos/fazenda_olho_dagua.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-05",
-    name: "Fazenda Córrego D'água",
-    coords: [-11.500, -46.800],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Ponto provável",
-    artifacts: 65,
-    site: "Dianópolis - TO",
-    image: "fotos/fazenda_corrego.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-06",
-    name: "Sítio Fundo D'aldeia",
-    coords: [-11.500, -46.800],
-    type: "Sítio Lítico-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lítico-cerâmico",
-    artifacts: 110,
-    site: "Darcinópolis - TO",
-    image: "fotos/fundo_aldeia.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-07",
-    name: "Fundo D'aldeia",
-    coords: [-11.500, -46.800],
-    type: "Sítio Lítico-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lítico-cerâmico",
-    artifacts: 105,
-    site: "Darcinópolis - TO",
-    image: "fotos/fundo_aldeia_2.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-08",
-    name: "Sítio Jaiú VI",
-    coords: [-9.500, -48.500],
-    type: "Sítio Cerâmico",
-    period: "Pré-colonial",
-    status: "Cerâmico: Sítio Jaiú VI",
-    artifacts: 150,
-    site: "Jaiú do Tocantins - TO",
-    image: "fotos/sitio_jaiu_vi.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-09",
-    name: "Sítio Jaiú - Torre 243",
-    coords: [-9.500, -48.500],
-    type: "Sítio Cerâmico",
-    period: "Pré-colonial",
-    status: "Cerâmico: Sítio Jaiú VI",
-    artifacts: 140,
-    site: "Jaiú do Tocantins - TO",
-    image: "fotos/sitio_jaiu_torre.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-10",
-    name: "Petroglifos TO-XA-001",
-    coords: [-6.500, -48.500],
-    type: "Sítio com Arte Rupestre",
-    period: "Pré-colonial",
-    status: "Petroglifos em ilha",
-    artifacts: 25,
-    site: "Xambioá - TO",
-    image: "fotos/petroglifos_xa.jpg",
-    color: "#8e44ad"
-  },
-  {
-    id: "vale-11",
-    name: "São José SJ.03",
-    coords: [-23.500, -46.500],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico - presença colonial",
-    artifacts: 180,
-    site: "Mogi das Cruzes - SP",
-    image: "fotos/sao_jose_sj.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-12",
-    name: "Arruda",
-    coords: [-23.200, -49.400],
-    type: "Oficina Lítica",
-    period: "Pré-colonial",
-    status: "Oficina lítica",
-    artifacts: 90,
-    site: "Piraju - SP",
-    image: "fotos/arruda.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-13",
-    name: "Narandiba 2",
-    coords: [-22.400, -51.500],
-    type: "Aldeia",
-    period: "Pré-colonial",
-    status: "Aldeia de horticultores",
-    artifacts: 200,
-    site: "Narandiba - SP",
-    image: "fotos/narandiba_2.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-14",
-    name: "Ilha do Rio sambaqui",
-    coords: [-24.300, -47.000],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui conchífero",
-    artifacts: 300,
-    site: "Peruíbe - SP",
-    image: "fotos/ilha_rio_sambaqui.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-15",
-    name: "Engenho da Feiticeira",
-    coords: [-23.783, -45.350],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Ruínas de um engenho",
-    artifacts: 85,
-    site: "Ilhabela - SP",
-    image: "fotos/engenho_feiticeira.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-16",
-    name: "Acampamento Búzios",
-    coords: [-23.783, -45.350],
-    type: "Acampamento",
-    period: "Pré-colonial",
-    status: "Acampamento pré-histórico",
-    artifacts: 75,
-    site: "Ilhabela - SP",
-    image: "fotos/acampamento_buzios.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-17",
-    name: "Aldeia Viana",
-    coords: [-23.783, -45.367],
-    type: "Aldeia",
-    period: "Pré-colonial",
-    status: "Antiga aldeia indígena",
-    artifacts: 220,
-    site: "Ilhabela - SP",
-    image: "fotos/aldeia_viana.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-18",
-    name: "Rio das Pec26-lg-12",
-    coords: [-24.700, -47.500],
-    type: "Estrutura",
-    period: "Pré-colonial",
-    status: "Possui paredes e pilares",
-    artifacts: 60,
-    site: "Iguape - SP",
-    image: "fotos/rio_das_pedras.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-19",
-    name: "Caverna dc Nº 14",
-    coords: [-24.700, -47.500],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sítio conchífero sob ataque",
-    artifacts: 180,
-    site: "Iguape - SP",
-    image: "fotos/caverna_14.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-20",
-    name: "Cemitério Maranata",
-    coords: [-20.733, -48.917],
-    type: "Cemitério",
-    period: "Quaternário",
-    status: "Sítio cemitério - quaternário",
-    artifacts: 95,
-    site: "Olímpia - SP",
-    image: "fotos/cemiterio_maranata.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-21",
-    name: "Abrigo da Santa",
-    coords: [-22.133, -47.667],
-    type: "Abrigo com Arte Rupestre",
-    period: "Pré-colonial",
-    status: "Sinalações rupestres e abrigo",
-    artifacts: 150,
-    site: "Analândia - SP",
-    image: "fotos/abrigo_santa.jpg",
-    color: "#8e44ad"
-  },
-  {
-    id: "vale-22",
-    name: "Itaguá",
-    coords: [-23.433, -45.083],
-    type: "Sítio Lito-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lito-cerâmico, tradição Tupiguarani",
-    artifacts: 300,
-    site: "Ubatuba - SP",
-    image: "fotos/itagua.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-23",
-    name: "Tenório",
-    coords: [-23.433, -45.067],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 120,
-    site: "Ubatuba - SP",
-    image: "fotos/tenorio.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-24",
-    name: "Canuto II",
-    coords: [-22.533, -45.283],
-    type: "Sítio Lito-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lito-cerâmico a céu aberto",
-    artifacts: 110,
-    site: "Teodoro Sampaio - SP",
-    image: "fotos/canuto_ii.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-25",
-    name: "Alpargatas",
-    coords: [-23.350, -45.150],
-    type: "Sítio Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio cerâmico, ocorrência de material cerâmico",
-    artifacts: 180,
-    site: "Tatuí - SP",
-    image: "fotos/alpargatas.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-26",
-    name: "Canuto I",
-    coords: [-22.533, -45.283],
-    type: "Sítio Lito-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lito-cerâmico a céu aberto",
-    artifacts: 95,
-    site: "Teodoro Sampaio - SP",
-    image: "fotos/canuto_i.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-27",
-    name: "Lagoa Preta",
-    coords: [-21.133, -47.767],
-    type: "Sítio Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio cerâmico a céu aberto",
-    artifacts: 140,
-    site: "Serra Azul - SP",
-    image: "fotos/lagoa_preta.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-28",
-    name: "Balneário",
-    coords: [-21.467, -47.550],
-    type: "Sítio Pré-cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio pré-cerâmico a céu aberto",
-    artifacts: 75,
-    site: "São Simão - SP",
-    image: "fotos/balneario.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-29",
-    name: "Belmonte",
-    coords: [-21.467, -47.550],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 85,
-    site: "São Simão - SP",
-    image: "fotos/belmonte.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-30",
-    name: "Mosteiro",
-    coords: [-23.933, -46.333],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico, superfície com material histórico",
-    artifacts: 200,
-    site: "Santos - SP",
-    image: "fotos/mosteiro.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-31",
-    name: "O Porto",
-    coords: [-23.933, -46.333],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico (atualmente urbanizado)",
-    artifacts: 160,
-    site: "Santos - SP",
-    image: "fotos/o_porto.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-32",
-    name: "Frontaria AS.Az.",
-    coords: [-23.933, -46.333],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico - vestígios coloniais",
-    artifacts: 130,
-    site: "Santos - SP",
-    image: "fotos/frontaria.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-33",
-    name: "Casarão do S.F.N.",
-    coords: [-23.933, -46.333],
-    type: "Sítio Histórico",
-    period: "Colonial",
-    status: "Sítio histórico (incendiado)",
-    artifacts: 90,
-    site: "Santos - SP",
-    image: "fotos/casarao_sfn.jpg",
-    color: "#d95d39"
-  },
-  {
-    id: "vale-34",
-    name: "Ocorrência OAQS",
-    coords: [-22.583, -53.000],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico",
-    artifacts: 70,
-    site: "Rosana - SP",
-    image: "fotos/ocorrencia_oaqs.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-35",
-    name: "Alice Boer",
-    coords: [-22.400, -47.567],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 120,
-    site: "Rio Claro - SP",
-    image: "fotos/alice_boer.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-36",
-    name: "João Boer",
-    coords: [-22.400, -47.567],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 130,
-    site: "Rio Claro - SP",
-    image: "fotos/joao_boer.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-37",
-    name: "Queimadou",
-    coords: [-23.067, -47.967],
-    type: "Sítio Pré-cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio pré-cerâmico a céu aberto",
-    artifacts: 85,
-    site: "Pereiras - SP",
-    image: "fotos/queimadou.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-38",
-    name: "Sambaqui Capellnha",
-    coords: [-24.700, -48.000],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui fluvial; múltiplas camadas",
-    artifacts: 250,
-    site: "Jacupiranga - SP",
-    image: "fotos/sambaqui_capellnha.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-39",
-    name: "Cemitério cSP BA 23",
-    coords: [-24.117, -49.333],
-    type: "Cemitério",
-    period: "Pré-colonial",
-    status: "Ocorrência de estruturas funerárias",
-    artifacts: 110,
-    site: "Itararé - SP",
-    image: "fotos/cemiterio_ba23.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-40",
-    name: "Alambari",
-    coords: [-23.583, -48.050],
-    type: "Sítio Lito-Cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio lito-cerâmico a céu aberto",
-    artifacts: 160,
-    site: "Itapetininga - SP",
-    image: "fotos/alambari.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-41",
-    name: "Abrigo Maximiano",
-    coords: [-24.583, -48.583],
-    type: "Abrigo sob Rocha",
-    period: "Pré-colonial",
-    status: "Abrigo sob rocha com ocorrência de material lítico",
-    artifacts: 95,
-    site: "Iporanga - SP",
-    image: "fotos/abrigo_maximiano.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-42",
-    name: "Abrigo da Glória",
-    coords: [-22.433, -47.717],
-    type: "Abrigo sob Rocha",
-    period: "Pré-colonial",
-    status: "Abrigo com ocorrência de material lítico",
-    artifacts: 110,
-    site: "Ipeúna - SP",
-    image: "fotos/abrigo_gloria.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-43",
-    name: "Abrigo das Abelhas",
-    coords: [-23.350, -47.717],
-    type: "Abrigo sob Rocha",
-    period: "Pré-colonial",
-    status: "Abrigo sob rocha - ocorrência de material lítico",
-    artifacts: 85,
-    site: "Iperó - SP",
-    image: "fotos/abrigo_abelhas.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-44",
-    name: "São Pedro",
-    coords: [-23.367, -48.183],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Pequena ocorrência lítica",
-    artifacts: 60,
-    site: "Guareí - SP",
-    image: "fotos/sao_pedro.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-45",
-    name: "Vista Alegre",
-    coords: [-23.367, -48.183],
-    type: "Sítio Pré-cerâmico",
-    period: "Pré-colonial",
-    status: "Sítio pré-cerâmico, extensão pequena",
-    artifacts: 75,
-    site: "Guareí - SP",
-    image: "fotos/vista_alegre.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-46",
-    name: "Areia Branca",
-    coords: [-23.367, -48.183],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 90,
-    site: "Guareí - SP",
-    image: "fotos/areia_branca.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-47",
-    name: "Catanduva",
-    coords: [-23.367, -48.183],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Sítio lítico a céu aberto",
-    artifacts: 85,
-    site: "Guareí - SP",
-    image: "fotos/catanduva.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-48",
-    name: "Pau Papudo",
-    coords: [-23.367, -48.183],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Ocorrência de pouca quantidade de material",
-    artifacts: 50,
-    site: "Guareí - SP",
-    image: "fotos/pau_papudo.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-49",
-    name: "Abrigo das SP-MR-17",
-    coords: [-21.283, -47.300],
-    type: "Abrigo com Arte Rupestre",
-    period: "Pré-colonial",
-    status: "Arte rupestre: painel com inscrições",
-    artifacts: 40,
-    site: "Cajuru - SP",
-    image: "fotos/abrigo_mr17.jpg",
-    color: "#8e44ad"
-  },
-  {
-    id: "vale-50",
-    name: "Lagoa do S.IVE 030",
-    coords: [-26.317, -48.850],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Afloramentos de diabásio com material lítico",
-    artifacts: 110,
-    site: "Joinville - SC",
-    image: "fotos/lagoa_sive.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-51",
-    name: "Morro do / JVE 026",
-    coords: [-26.317, -48.850],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui em ilha",
-    artifacts: 280,
-    site: "Joinville - SC",
-    image: "fotos/morro_jve26.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-52",
-    name: "Morro do / JVE 027",
-    coords: [-26.317, -48.850],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui em ilha",
-    artifacts: 260,
-    site: "Joinville - SC",
-    image: "fotos/morro_jve27.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-53",
-    name: "Morro do / JVE 028",
-    coords: [-26.317, -48.850],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui em ilha",
-    artifacts: 240,
-    site: "Joinville - SC",
-    image: "fotos/morro_jve28.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-54",
-    name: "Rio Riacho JVE 029",
-    coords: [-26.317, -48.850],
-    type: "Sítio de Ocupação",
-    period: "Pré-colonial",
-    status: "Área ocupada na pré-história",
-    artifacts: 180,
-    site: "Joinville - SC",
-    image: "fotos/rio_riacho.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-55",
-    name: "Morro do / JVE 024",
-    coords: [-26.317, -48.850],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui observável",
-    artifacts: 220,
-    site: "Joinville - SC",
-    image: "fotos/morro_jve24.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-56",
-    name: "Morro do / JVE 025",
-    coords: [-26.317, -48.850],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui em ilha",
-    artifacts: 200,
-    site: "Joinville - SC",
-    image: "fotos/morro_jve25.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-57",
-    name: "Rainha AQI 025",
-    coords: [-26.383, -48.717],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Encontra-se bastante alterado",
-    artifacts: 95,
-    site: "Araquari - SC",
-    image: "fotos/rainha_aqi.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-58",
-    name: "Santo Antônio PCX 001",
-    coords: [-26.767, -48.667],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Área com localização incerta",
-    artifacts: 80,
-    site: "Piçarras - SC",
-    image: "fotos/santo_antonio_pcx.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-59",
-    name: "Itaipava I IAI 019",
-    coords: [-26.917, -48.667],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Encontra-se totalmente destruído",
-    artifacts: 45,
-    site: "Itajaí - SC",
-    image: "fotos/itaipava_i.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-60",
-    name: "Carvoeira PEN 004",
-    coords: [-26.767, -48.600],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Situa-se a 200 metros da costa",
-    artifacts: 70,
-    site: "Penha - SC",
-    image: "fotos/carvoeira_pen.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-61",
-    name: "Pereguê II PEB 007",
-    coords: [-27.150, -48.550],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Localiza-se a 100 metros da costa",
-    artifacts: 85,
-    site: "Porto Belo - SC",
-    image: "fotos/peregue_ii.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-62",
-    name: "Canhanduba IAI 018",
-    coords: [-26.917, -48.667],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Localiza-se numa pequena elevação",
-    artifacts: 65,
-    site: "Itajaí - SC",
-    image: "fotos/canhanduba.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-63",
-    name: "Areias de BBGG 004",
-    coords: [-27.500, -48.650],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Localiza-se ao fundo da baía",
-    artifacts: 75,
-    site: "Biguaçu - SC",
-    image: "fotos/areias_bbgg.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-64",
-    name: "Pereguê I PEB 006",
-    coords: [-27.150, -48.550],
-    type: "Sítio Lítico",
-    period: "Pré-colonial",
-    status: "Encontra-se arrasado",
-    artifacts: 55,
-    site: "Porto Belo - SC",
-    image: "fotos/peregue_i.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-65",
-    name: "Conjunto HBGC 001",
-    coords: [-27.500, -48.650],
-    type: "Sítio Múltiplo",
-    period: "Pré-colonial",
-    status: "Composto pelos vestígios de ocupação",
-    artifacts: 190,
-    site: "Biguaçu - SC",
-    image: "fotos/conjunto_hbgc.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-66",
-    name: "Rio Novo SMO 001",
-    coords: [-29.117, -49.800],
-    type: "Sítio Raso",
-    period: "Pré-colonial",
-    status: "Sítio raso, tipo 'sujo'",
-    artifacts: 110,
-    site: "Sombrio - SC",
-    image: "fotos/rio_novo_smo.jpg",
-    color: "#4a7b9d"
-  },
-  {
-    id: "vale-67",
-    name: "Ponta do P LGA 021",
-    coords: [-28.483, -48.783],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui junto a embasamento rochoso",
-    artifacts: 230,
-    site: "Laguna - SC",
-    image: "fotos/ponta_p_lga21.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-68",
-    name: "Ponta do P LGA 022",
-    coords: [-28.483, -48.783],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sítio localizado a 100m da costa",
-    artifacts: 210,
-    site: "Laguna - SC",
-    image: "fotos/ponta_p_lga22.jpg",
-    color: "#27ae60"
-  },
-  {
-    id: "vale-69",
-    name: "Estreito LGA 023",
-    coords: [-28.483, -48.783],
-    type: "Sambaqui",
-    period: "Pré-colonial",
-    status: "Sambaqui em região estreita",
-    artifacts: 195,
-    site: "Laguna - SC",
-    image: "fotos/estreito_lga.jpg",
-    color: "#27ae60"
-  }
-]
+             {
+        id: 'site-01',
+        name: 'Lapa do Santo',
+        coords: [-19.605, -44.000],
+        type: 'Sítio em Escavação',
+        period: 'Holoceno Inicial',
+        status: 'Documentado',
+        artifacts: 800,
+        color: '#e74c3c',
+        image: 'fotos/isblog05.jpg'
+    },
+    {
+        id: 'site-02',
+        name: 'Caverna da Pedra Pintada',
+        coords: [-1.99768, -54.07239], 
+        type: 'Sítio Documentado',
+        period: 'Pleistoceno–Holoceno',
+        status: 'Documentado',
+        artifacts: 42,
+        image: 'fotos/6b242fff068c7c41102b319c37e38ab374e70375.jpg',
+        color: '#3498db'
+    },
+    {
+        id: 'site-03',
+        name: 'Sambaqui do Moa',
+        coords: [-22.9667, -42.0333], 
+        type: 'Área Protegida',
+        period: 'Holoceno Médio',
+        status: 'Protegido',
+        artifacts: 356,
+        image: 'fotos/image032.jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'site-04',
+        name: 'Terra Preta do Índio',
+        coords: [-3.1667, -60.0167], 
+        type: 'Sítio Documentado',
+        period: 'Holoceno Tardio',
+        status: 'Documentado',
+        artifacts: 215,
+        image: 'fotos/24RA542.jpg',
+        color: '#3498db'
+    },
+    {
+        id: 'site-05',
+        name: 'Serra da Capivara',
+        coords: [-8.8371, -42.5636],
+        type: 'Área Protegida',
+        period: 'Pleistoceno–Holoceno',
+        status: 'Patrimônio Mundial',
+        artifacts: 1200,
+        image: 'fotos/serradacapivara-vidasemparedes-33-1024x576.webp',
+        color: '#2ecc71'
+    },
+    {
+        id: 'site-06',
+        name: 'Museu de Arqueologia Bíblica - (MAB/UNASP)',
+        coords: [-22.5011, -47.1651],
+        type: 'Museus Arqueológicos',
+        period: 'Contemporâneo',
+        status: 'Ativo',
+        artifacts: 150,
+        color: '#f1c40f',
+        siteUrl: 'https://tour.unasp.edu.br/mab',
+        image: 'fotos/images (1).jpg'
+    },
+    {
+        id: 'site-07',
+        name: 'Universidade de São Paulo – Museu de Arqueologia e Etnologia (MAE/USP)',
+        coords: [-23.561399, -46.730789], 
+        type: 'Museus Arqueológicos',
+        period: 'Pré-colonial a Contemporâneo',
+        status: 'Ativo',
+        artifacts: 150,
+        color: '#f1c40f',
+        image: 'fotos/12DC341.jpg',
+        siteUrl: 'USP.html'
+    },
+    {
+        id: 'site-08',
+        name: 'Museu de Arqueologia e Etnologia (MAE/UFBA)',
+        coords: [-12.972771, -38.510216], 
+        type: 'Museus Arqueológicos',
+        period: 'Pré-colonial, colonial e contemporâneo',
+        status: 'Ativo',
+        artifacts: 200,
+        image: 'fotos/images (2).jpg', 
+        color: '#f1c40f'
+    },
+    {
+        id: 'artefato-02',
+        name: 'Capacete celta de bronze',
+        coords: [52.400, 21.150],
+        type: 'Artefato Registrado',
+        period: 'Idade do Ferro',
+        status: 'Achado isolado em área rural',
+        artifacts: 200,
+        site: 'Desconhecido (fora de sítio celta)',
+        image: 'fotos/Celtic_-_Helmet_Italo-Celtic_3rd_century_BC_(bronze)_-_(MeisterDrucke-241460).jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-03',
+        name: 'Fragmento cerâmico Tupi',
+        coords: [-16.0056, -51.3971],
+        type: 'Artefato Registrado',
+        period: 'Pré-colonial',
+        status: 'Disperso em área agrícola',
+        site: 'Montes Claros de Goiás',
+        artifacts: 200,
+        image: 'fotos/fragmentos.jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-04',
+        name: 'Lesma lítica (Tradição Itaparica)',
+        coords: [-10.000, -56.000],
+        type: 'Artefato Registrado',
+        period: 'Pré-cerâmica',
+        status: 'Encontrado fora de abrigo',
+        site: 'Tradição Itaparica',
+        artifacts: 200,
+        image: 'fotos/images (3).jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-05',
+        name: 'Machado polido isolado',
+        coords: [-19.630, -43.882],
+        type: 'Artefato Registrado',
+        period: 'Holoceno Médio',
+        status: 'Fora de contexto',
+        site: 'Região de Lagoa Santa',
+        artifacts: 200,
+        image: 'fotos/463-1.jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-06',
+        name: 'Estatueta romana em mármore',
+        coords: [41.9028, 12.4964],
+        type: 'Artefato Registrado',
+        period: 'Império Romano',
+        status: 'Recuperado em mercado ilegal',
+        site: 'Origem incerta',
+        artifacts: 200,
+        image: 'fotos/ah-padrao-2024-10-18t125446055.jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-07',
+        name: 'Cerâmica Marajoara',
+        coords: [-9.9085, -64.3050],
+        type: 'Artefato Registrado',
+        period: 'Pré-colombiano',
+        status: 'Encontrada fora de sítio',
+        site: 'Região do Rio Madeira',
+        artifacts: 200,
+        image: 'fotos/Cylindrical_vessel_Collection_H_Law_170_n2.jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-08',
+        name: 'Pontas de flecha tupinambá',
+        coords: [-23.5505, -46.6333],
+        type: 'Artefato Registrado',
+        period: 'Pré-colonial',
+        status: 'Disperso em área florestal',
+        site: 'Mata Atlântica',
+        artifacts: 200,
+        image: 'fotos/Fleche_Cartailhac_MHNT_PRE_2009.0.232.2_simple (1).jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'artefato-09',
+        name: 'Fóssil de Luzia',
+        coords: [-19.9317, -43.9408],
+        type: 'Artefato Registrado',
+        period: 'Pleistoceno final (cerca de 11.500 anos)',
+        status: 'Parcialmente preservado após incêndio',
+        site: 'Lapa Vermelha, Pedro Leopoldo - MG',
+        artifacts: 200,
+        image: 'fotos/cranio_de_luzia.jpg',
+        color: '#f39c12'
+    },
+    {
+        id: 'area-01',
+        name: 'Parque Nacional da Tijuca',
+        coords: [-22.9485, -43.2343],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Mata Atlântica',
+        artifacts: 850,
+        image: 'fotos/images (4).jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-02',
+        name: 'Reserva Biológica de Sooretama',
+        coords: [-19.0892, -40.3150],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Mata Atlântica',
+        artifacts: 400,
+        image: 'fotos/ipatrimonio-Sooretama-Reserva-Biologica-de-Sooretama-Imagem-ICMBio.jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-03',
+        name: 'Parque Nacional do Pico da Neblina',
+        coords: [0.8173, -66.5600],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Amazônia',
+        artifacts: 1200,
+        image: 'fotos/Pico_da_Neblina.jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-05',
+        name: 'Reserva Extrativista Marinha do Marajó',
+        coords: [-0.9847, -49.6663],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Amazônia',
+        artifacts: 600,
+        image: 'fotos/images (5).jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-06',
+        name: 'Floresta Nacional do Tapajós',
+        coords: [-3.4766, -57.1181],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Amazônia',
+        artifacts: 1100,
+        image: 'fotos/images (6).jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-07',
+        name: 'Parque Indígena do Xingu',
+        coords: [-12.5000, -52.5000],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Cerrado / Amazônia',
+        artifacts: 1300,
+        image: 'fotos/1.jpeg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'area-08',
+        name: 'Parque Nacional da Chapada Diamantina',
+        coords: [-12.5000, -41.4500],
+        type: 'Área Protegida',
+        status: 'Protegida',
+        biome: 'Caatinga / Mata Atlântica',
+        artifacts: 700,
+        image: 'fotos/Desde_o_Morro_do_Pai_Inácio.jpg',
+        color: '#2ecc71'
+    },
+    {
+        id: 'estrut-01',
+        name: 'Templo do Sol (Coricancha)',
+        coords: [-13.5181, -71.9786],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas preservadas',
+        description: 'Templo solar principal do Império Inca, base de construções posteriores.',
+        artifacts: 450,
+        image: 'fotos/images (7).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-02',
+        name: 'Pirâmide do Sol',
+        coords: [19.6925, -98.8438],
+        type: 'Estrutura Arqueológica',
+        status: 'Conservada',
+        description: 'Uma das maiores pirâmides da América pré-colombiana, centro cerimonial.',
+        artifacts: 1200,
+        image: 'fotos/images (9).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-03',
+        name: 'Templo de Ártemis',
+        coords: [37.9582, 27.3642],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas fragmentadas',
+        description: 'Construído em homenagem à deusa Ártemis, foi uma das Sete Maravilhas do Mundo Antigo, destruído por um incêndio e saqueado.',
+        artifacts: 120,
+        image: 'fotos/images (16).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-04',
+        name: 'Palácio de Knossos',
+        coords: [35.2989, 25.1648],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Complexo palaciano da civilização minoana, com frescos e arquitetura sofisticada.',
+        artifacts: 600,
+        image: 'fotos/images (8).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-05',
+        name: 'Muralhas de Chan Chan',
+        coords: [-8.1120, -79.0330],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Ruínas de antiga capital Chimú, com grandes muralhas e palácios.',
+        artifacts: 900,
+        image: 'fotos/istockphoto-498796572-612x612.jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-06',
+        name: 'Templo de Kukulkán (El Castillo)',
+        coords: [20.6829, -88.5698],
+        type: 'Estrutura Arqueológica',
+        status: 'Preservada',
+        description: 'Pirâmide escalonada dedicada ao deus Kukulkán, famosa por seu alinhamento astronômico.',
+        artifacts: 1000,
+        image: 'fotos/images (10).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-07',
+        name: 'Templo de Hathor',
+        coords: [25.7403, 32.6014],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Templo dedicado à deusa Hathor, com relevos e arquitetura bem preservada.',
+        artifacts: 700,
+        image: 'fotos/images (11).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-08',
+        name: 'Ruínas da Igreja de São Miguel das Missões',
+        coords: [-27.4941, -54.5810],
+        type: 'Estrutura Arqueológica',
+        status: 'Parcialmente preservada',
+        description: 'Igreja da missão jesuítica do século XVIII, importante para a história colonial.',
+        artifacts: 350,
+        image: 'fotos/images (12).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-09',
+        name: 'Pirâmide de Cochasquí',
+        coords: [-0.0055, -78.4098],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Complexo arqueológico com pirâmides truncadas e plataformas cerimoniais.',
+        artifacts: 500,
+        image: 'fotos/Foto-142-Piramide-de-Cochasqui.jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-10',
+        name: 'Fortaleza de Sacsayhuamán',
+        coords: [-13.5090, -71.9817],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Estrutura megalítica com pedras encaixadas com precisão incrível.',
+        artifacts: 800,
+        image: 'fotos/images (13).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-11',
+        name: 'Templo de Kalasasaya',
+        coords: [-16.5613, -68.6537],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas',
+        description: 'Grande templo cerimonial com estruturas de pedra monumental.',
+        artifacts: 650,
+        image: 'fotos/Templo_de_Kalasasaya_a_socha_Monolito_Ponce_-_Tiwanaku_-_panoramio_(1) (1).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'estrut-12',
+        name: 'Mausoléu de Halicarnasso',
+        coords: [37.0379, 27.4241],
+        type: 'Estrutura Arqueológica',
+        status: 'Ruínas parciais',
+        description: 'Uma das Sete Maravilhas do Mundo Antigo, tumba construída para Mausolo, sátrapa da Cária.',
+        artifacts: 150,
+        image: 'fotos/download (2).jpg',
+        color: '#9b59b6'
+    },
+    {
+        id: 'escav-01',
+        name: 'Sambaqui do Bacanga',
+        coords: [-2.5333, -44.2833],
+        type: 'Sítio em Escavação',
+        status: 'Em escavação',
+        description: 'Sítio costeiro com conchas, esqueletos humanos e artefatos líticos.',
+        artifacts: 720,
+        image: 'fotos/Figura-6-Escavacao-da-Superficie-Ampla-no-Sambaqui-do-Bacanga.png',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-02',
+        name: 'Sítio Arqueológico do Alto da Estiva',
+        coords: [-7.2306, -35.8811],
+        type: 'Sítio em Escavação',
+        status: 'Escavação em andamento',
+        description: 'Fragmentos cerâmicos, estruturas de ocupação e sepultamentos.',
+        artifacts: 430,
+        image: 'fotos/stioarqueolgicotocadaanta.webp',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-03',
+        name: 'Sítio Furna do Estrago',
+        coords: [-8.2831, -36.0153],
+        type: 'Sítio em Escavação',
+        status: 'Escavação ativa',
+        description: 'Importante para o estudo da transição entre caçadores-coletores e ceramistas.',
+        artifacts: 860,
+        image: 'fotos/images (14).jpg',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-04',
+        name: 'Sítio do Riacho do Meio',
+        coords: [-9.3958, -37.9972],
+        type: 'Sítio em Escavação',
+        status: 'Investigação em curso',
+        description: 'Ocorrência de material lítico e ossadas humanas em bom estado.',
+        artifacts: 390,
+        image: 'fotos/riachodomeio.jpg',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-05',
+        name: 'Sítio Arqueológico Santa Elina',
+        coords: [-15.1333, -59.0833],
+        type: 'Sítio em Escavação',
+        status: 'Escavações recentes',
+        description: 'Possível presença de megafauna associada a humanos.',
+        artifacts: 510,
+        image: 'fotos/Parede_do_Sítio_arqueológico_Santa_Elina.jpg',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-06',
+        name: 'Sítio da Lapa do Boquete',
+        coords: [-14.3206, -43.8456],
+        type: 'Sítio em Escavação',
+        status: 'Escavação ativa',
+        description: 'Sepultamentos com urnas funerárias e ferramentas.',
+        artifacts: 740,
+        image: 'fotos/janelao.jpg',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-07',
+        name: 'Sítio Arqueológico do Vale do Ribeira',
+        coords: [-24.6000, -48.7000],
+        type: 'Sítio em Escavação',
+        status: 'Pesquisas em andamento',
+        description: 'Material ósseo, cerâmico e estruturas rituais pré-coloniais.',
+        artifacts: 620,
+        image: 'fotos/images (15).jpg',
+        color: '#e74c3c'
+    },
+    {
+        id: 'escav-08',
+        name: 'Sítio Pedra do Alexandre',
+        coords: [-6.8847, -39.8781],
+        type: 'Sítio em Escavação',
+        status: 'Escavação recente',
+        description: 'Arte rupestre e artefatos associados a rituais.',
+        artifacts: 360,
+        image: 'fotos/Figura-5-Enterramento-15-do-sitio-Pedra-do-Alexandre-Area-Arqueologica-do-Serido (1).png',
+        color: '#e74c3c'
+    },
+    // SÍTIOS DO VALE DO PARAÍBA - CIDADES ESPECÍFICAS
+    {
+        id: 'site-sjc-mariana-01',
+        name: 'Sítio Arqueológico Jardim Mariana I - São José dos Campos',
+        coords: [-23.2342, -45.8994],
+        type: 'Sítio de Ocupação Indígena',
+        period: 'Período Pré-Colonial (~400 anos)',
+        culture: 'Tupi-Guarani',
+        status: 'Em Estudo pelo IPHAN',
+        artifacts: 300,
+        description: 'Descoberta acidental em 2021 durante obras. Materiais indicam assentamento indígena com práticas de subsistência e armazenamento.',
+        institution: 'IPHAN / Fundação Cultural Cassiano Ricardo',
+        access: 'Não aberto à visitação pública',
+        color: '#3498db',
+        image: 'fotos/250478117_4262692817162826_2384230040786853257_n'
+    },
+    {
+        id: 'site-sjc-cemiterio-01',
+        name: 'Cemitério de Escravos - Chácara dos Franceses',
+        coords: [-23.2189, -45.9028],
+        type: 'Sítio Funerário',
+        period: 'Século XIX',
+        status: 'Escavado e Documentado',
+        description: 'Cemitério de escravos descoberto durante obras, com estudos arqueológicos realizados.',
+        artifacts: 300,
+        institution: 'IPHAN / UNESP',
+        color: '#3498db'
+    },
+        {
+        id: "vale-01",
+        name: "Morro Branco",
+        coords: [-11.500, -46.800],
+        type: "Sítio de Coleta",
+        period: "Pré-colonial",
+        status: "Coletou-se numa área",
+        artifacts: 45,
+        site: "Dianópolis - TO",
+        image: "fotos/morro_branco.jpg",
+        color: '#e74c3c' // Sítio em Escavação
+    },
+    {
+        id: "vale-02",
+        name: "Engenho S:CA-ESR I",
+        coords: [-9.500, -48.500],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico de engenho",
+        artifacts: 120,
+        site: "Miracema - TO",
+        image: "fotos/engenho_esr_i.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-03",
+        name: "São Romãc CA-SR II",
+        coords: [-9.500, -48.500],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico de engenho",
+        artifacts: 95,
+        site: "Miracema - TO",
+        image: "fotos/sao_roma_ii.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-04",
+        name: "Fazenda Olho D'água",
+        coords: [-11.500, -46.800],
+        type: "Sítio Cerâmico",
+        period: "Pré-colonial",
+        status: "Ponto provável - cerâmico",
+        artifacts: 80,
+        site: "Dianópolis - TO",
+        image: "fotos/fazenda_olho_dagua.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-05",
+        name: "Fazenda Córrego D'água",
+        coords: [-11.500, -46.800],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Ponto provável",
+        artifacts: 65,
+        site: "Dianópolis - TO",
+        image: "fotos/fazenda_corrego.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-06",
+        name: "Sítio Fundo D'aldeia",
+        coords: [-11.500, -46.800],
+        type: "Sítio Lítico-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lítico-cerâmico",
+        artifacts: 110,
+        site: "Darcinópolis - TO",
+        image: "fotos/fundo_aldeia.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-07",
+        name: "Fundo D'aldeia",
+        coords: [-11.500, -46.800],
+        type: "Sítio Lítico-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lítico-cerâmico",
+        artifacts: 105,
+        site: "Darcinópolis - TO",
+        image: "fotos/fundo_aldeia_2.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-08",
+        name: "Sítio Jaiú VI",
+        coords: [-9.500, -48.500],
+        type: "Sítio Cerâmico",
+        period: "Pré-colonial",
+        status: "Cerâmico: Sítio Jaiú VI",
+        artifacts: 150,
+        site: "Jaiú do Tocantins - TO",
+        image: "fotos/sitio_jaiu_vi.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-09",
+        name: "Sítio Jaiú - Torre 243",
+        coords: [-9.500, -48.500],
+        type: "Sítio Cerâmico",
+        period: "Pré-colonial",
+        status: "Cerâmico: Sítio Jaiú VI",
+        artifacts: 140,
+        site: "Jaiú do Tocantins - TO",
+        image: "fotos/sitio_jaiu_torre.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-10",
+        name: "Petroglifos TO-XA-001",
+        coords: [-6.500, -48.500],
+        type: "Sítio com Arte Rupestre",
+        period: "Pré-colonial",
+        status: "Petroglifos em ilha",
+        artifacts: 25,
+        site: "Xambioá - TO",
+        image: "fotos/petroglifos_xa.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-11",
+        name: "São José SJ.03",
+        coords: [-23.500, -46.500],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico - presença colonial",
+        artifacts: 180,
+        site: "Mogi das Cruzes - SP",
+        image: "fotos/sao_jose_sj.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-12",
+        name: "Arruda",
+        coords: [-23.200, -49.400],
+        type: "Oficina Lítica",
+        period: "Pré-colonial",
+        status: "Oficina lítica",
+        artifacts: 90,
+        site: "Piraju - SP",
+        image: "fotos/arruda.jpg",
+        color: "#f39c12"  // Artefato Registrado
+    },
+    {
+        id: "vale-13",
+        name: "Narandiba 2",
+        coords: [-22.400, -51.500],
+        type: "Aldeia",
+        period: "Pré-colonial",
+        status: "Aldeia de horticultores",
+        artifacts: 200,
+        site: "Narandiba - SP",
+        image: "fotos/narandiba_2.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-14",
+        name: "Ilha do Rio sambaqui",
+        coords: [-24.300, -47.000],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui conchífero",
+        artifacts: 300,
+        site: "Peruíbe - SP",
+        image: "fotos/ilha_rio_sambaqui.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-15",
+        name: "Engenho da Feiticeira",
+        coords: [-23.783, -45.350],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Ruínas de um engenho",
+        artifacts: 85,
+        site: "Ilhabela - SP",
+        image: "fotos/engenho_feiticeira.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-16",
+        name: "Acampamento Búzios",
+        coords: [-23.783, -45.350],
+        type: "Acampamento",
+        period: "Pré-colonial",
+        status: "Acampamento pré-histórico",
+        artifacts: 75,
+        site: "Ilhabela - SP",
+        image: "fotos/acampamento_buzios.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-17",
+        name: "Aldeia Viana",
+        coords: [-23.783, -45.367],
+        type: "Aldeia",
+        period: "Pré-colonial",
+        status: "Antiga aldeia indígena",
+        artifacts: 220,
+        site: "Ilhabela - SP",
+        image: "fotos/aldeia_viana.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-18",
+        name: "Rio das Pec26-lg-12",
+        coords: [-24.700, -47.500],
+        type: "Estrutura",
+        period: "Pré-colonial",
+        status: "Possui paredes e pilares",
+        artifacts: 60,
+        site: "Iguape - SP",
+        image: "fotos/rio_das_pedras.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-19",
+        name: "Caverna dc Nº 14",
+        coords: [-24.700, -47.500],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sítio conchífero sob ataque",
+        artifacts: 180,
+        site: "Iguape - SP",
+        image: "fotos/caverna_14.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-20",
+        name: "Cemitério Maranata",
+        coords: [-20.733, -48.917],
+        type: "Cemitério",
+        period: "Quaternário",
+        status: "Sítio cemitério - quaternário",
+        artifacts: 95,
+        site: "Olímpia - SP",
+        image: "fotos/cemiterio_maranata.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-21",
+        name: "Abrigo da Santa",
+        coords: [-22.133, -47.667],
+        type: "Abrigo com Arte Rupestre",
+        period: "Pré-colonial",
+        status: "Sinalações rupestres e abrigo",
+        artifacts: 150,
+        site: "Analândia - SP",
+        image: "fotos/abrigo_santa.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-22",
+        name: "Itaguá",
+        coords: [-23.433, -45.083],
+        type: "Sítio Lito-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lito-cerâmico, tradição Tupiguarani",
+        artifacts: 300,
+        site: "Ubatuba - SP",
+        image: "fotos/itagua.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-23",
+        name: "Tenório",
+        coords: [-23.433, -45.067],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 120,
+        site: "Ubatuba - SP",
+        image: "fotos/tenorio.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-24",
+        name: "Canuto II",
+        coords: [-22.533, -45.283],
+        type: "Sítio Lito-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lito-cerâmico a céu aberto",
+        artifacts: 110,
+        site: "Teodoro Sampaio - SP",
+        image: "fotos/canuto_ii.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-25",
+        name: "Alpargatas",
+        coords: [-23.350, -45.150],
+        type: "Sítio Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio cerâmico, ocorrência de material cerâmico",
+        artifacts: 180,
+        site: "Tatuí - SP",
+        image: "fotos/alpargatas.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-26",
+        name: "Canuto I",
+        coords: [-22.533, -45.283],
+        type: "Sítio Lito-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lito-cerâmico a céu aberto",
+        artifacts: 95,
+        site: "Teodoro Sampaio - SP",
+        image: "fotos/canuto_i.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-27",
+        name: "Lagoa Preta",
+        coords: [-21.133, -47.767],
+        type: "Sítio Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio cerâmico a céu aberto",
+        artifacts: 140,
+        site: "Serra Azul - SP",
+        image: "fotos/lagoa_preta.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-28",
+        name: "Balneário",
+        coords: [-21.467, -47.550],
+        type: "Sítio Pré-cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio pré-cerâmico a céu aberto",
+        artifacts: 75,
+        site: "São Simão - SP",
+        image: "fotos/balneario.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-29",
+        name: "Belmonte",
+        coords: [-21.467, -47.550],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 85,
+        site: "São Simão - SP",
+        image: "fotos/belmonte.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-30",
+        name: "Mosteiro",
+        coords: [-23.933, -46.333],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico, superfície com material histórico",
+        artifacts: 200,
+        site: "Santos - SP",
+        image: "fotos/mosteiro.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-31",
+        name: "O Porto",
+        coords: [-23.933, -46.333],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico (atualmente urbanizado)",
+        artifacts: 160,
+        site: "Santos - SP",
+        image: "fotos/o_porto.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-32",
+        name: "Frontaria AS.Az.",
+        coords: [-23.933, -46.333],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico - vestígios coloniais",
+        artifacts: 130,
+        site: "Santos - SP",
+        image: "fotos/frontaria.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-33",
+        name: "Casarão do S.F.N.",
+        coords: [-23.933, -46.333],
+        type: "Sítio Histórico",
+        period: "Colonial",
+        status: "Sítio histórico (incendiado)",
+        artifacts: 90,
+        site: "Santos - SP",
+        image: "fotos/casarao_sfn.jpg",
+        color: "#3498db"  // Sítio Documentado
+    },
+    {
+        id: "vale-34",
+        name: "Ocorrência OAQS",
+        coords: [-22.583, -53.000],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico",
+        artifacts: 70,
+        site: "Rosana - SP",
+        image: "fotos/ocorrencia_oaqs.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-35",
+        name: "Alice Boer",
+        coords: [-22.400, -47.567],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 120,
+        site: "Rio Claro - SP",
+        image: "fotos/alice_boer.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-36",
+        name: "João Boer",
+        coords: [-22.400, -47.567],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 130,
+        site: "Rio Claro - SP",
+        image: "fotos/joao_boer.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-37",
+        name: "Queimadou",
+        coords: [-23.067, -47.967],
+        type: "Sítio Pré-cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio pré-cerâmico a céu aberto",
+        artifacts: 85,
+        site: "Pereiras - SP",
+        image: "fotos/queimadou.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-38",
+        name: "Sambaqui Capellnha",
+        coords: [-24.700, -48.000],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui fluvial; múltiplas camadas",
+        artifacts: 250,
+        site: "Jacupiranga - SP",
+        image: "fotos/sambaqui_capellnha.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-39",
+        name: "Cemitério cSP BA 23",
+        coords: [-24.117, -49.333],
+        type: "Cemitério",
+        period: "Pré-colonial",
+        status: "Ocorrência de estruturas funerárias",
+        artifacts: 110,
+        site: "Itararé - SP",
+        image: "fotos/cemiterio_ba23.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-40",
+        name: "Alambari",
+        coords: [-23.583, -48.050],
+        type: "Sítio Lito-Cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio lito-cerâmico a céu aberto",
+        artifacts: 160,
+        site: "Itapetininga - SP",
+        image: "fotos/alambari.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-41",
+        name: "Abrigo Maximiano",
+        coords: [-24.583, -48.583],
+        type: "Abrigo sob Rocha",
+        period: "Pré-colonial",
+        status: "Abrigo sob rocha com ocorrência de material lítico",
+        artifacts: 95,
+        site: "Iporanga - SP",
+        image: "fotos/abrigo_maximiano.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-42",
+        name: "Abrigo da Glória",
+        coords: [-22.433, -47.717],
+        type: "Abrigo sob Rocha",
+        period: "Pré-colonial",
+        status: "Abrigo com ocorrência de material lítico",
+        artifacts: 110,
+        site: "Ipeúna - SP",
+        image: "fotos/abrigo_gloria.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-43",
+        name: "Abrigo das Abelhas",
+        coords: [-23.350, -47.717],
+        type: "Abrigo sob Rocha",
+        period: "Pré-colonial",
+        status: "Abrigo sob rocha - ocorrência de material lítico",
+        artifacts: 85,
+        site: "Iperó - SP",
+        image: "fotos/abrigo_abelhas.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-44",
+        name: "São Pedro",
+        coords: [-23.367, -48.183],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Pequena ocorrência lítica",
+        artifacts: 60,
+        site: "Guareí - SP",
+        image: "fotos/sao_pedro.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-45",
+        name: "Vista Alegre",
+        coords: [-23.367, -48.183],
+        type: "Sítio Pré-cerâmico",
+        period: "Pré-colonial",
+        status: "Sítio pré-cerâmico, extensão pequena",
+        artifacts: 75,
+        site: "Guareí - SP",
+        image: "fotos/vista_alegre.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-46",
+        name: "Areia Branca",
+        coords: [-23.367, -48.183],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 90,
+        site: "Guareí - SP",
+        image: "fotos/areia_branca.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-47",
+        name: "Catanduva",
+        coords: [-23.367, -48.183],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Sítio lítico a céu aberto",
+        artifacts: 85,
+        site: "Guareí - SP",
+        image: "fotos/catanduva.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-48",
+        name: "Pau Papudo",
+        coords: [-23.367, -48.183],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Ocorrência de pouca quantidade de material",
+        artifacts: 50,
+        site: "Guareí - SP",
+        image: "fotos/pau_papudo.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-49",
+        name: "Abrigo das SP-MR-17",
+        coords: [-21.283, -47.300],
+        type: "Abrigo com Arte Rupestre",
+        period: "Pré-colonial",
+        status: "Arte rupestre: painel com inscrições",
+        artifacts: 40,
+        site: "Cajuru - SP",
+        image: "fotos/abrigo_mr17.jpg",
+        color: "#9b59b6"  // Estrutura Arqueológica
+    },
+    {
+        id: "vale-50",
+        name: "Lagoa do S.IVE 030",
+        coords: [-26.317, -48.850],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Afloramentos de diabásio com material lítico",
+        artifacts: 110,
+        site: "Joinville - SC",
+        image: "fotos/lagoa_sive.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-51",
+        name: "Morro do / JVE 026",
+        coords: [-26.317, -48.850],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui em ilha",
+        artifacts: 280,
+        site: "Joinville - SC",
+        image: "fotos/morro_jve26.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-52",
+        name: "Morro do / JVE 027",
+        coords: [-26.317, -48.850],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui em ilha",
+        artifacts: 260,
+        site: "Joinville - SC",
+        image: "fotos/morro_jve27.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-53",
+        name: "Morro do / JVE 028",
+        coords: [-26.317, -48.850],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui em ilha",
+        artifacts: 240,
+        site: "Joinville - SC",
+        image: "fotos/morro_jve28.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-54",
+        name: "Rio Riacho JVE 029",
+        coords: [-26.317, -48.850],
+        type: "Sítio de Ocupação",
+        period: "Pré-colonial",
+        status: "Área ocupada na pré-história",
+        artifacts: 180,
+        site: "Joinville - SC",
+        image: "fotos/rio_riacho.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-55",
+        name: "Morro do / JVE 024",
+        coords: [-26.317, -48.850],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui observável",
+        artifacts: 220,
+        site: "Joinville - SC",
+        image: "fotos/morro_jve24.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-56",
+        name: "Morro do / JVE 025",
+        coords: [-26.317, -48.850],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui em ilha",
+        artifacts: 200,
+        site: "Joinville - SC",
+        image: "fotos/morro_jve25.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-57",
+        name: "Rainha AQI 025",
+        coords: [-26.383, -48.717],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Encontra-se bastante alterado",
+        artifacts: 95,
+        site: "Araquari - SC",
+        image: "fotos/rainha_aqi.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-58",
+        name: "Santo Antônio PCX 001",
+        coords: [-26.767, -48.667],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Área com localização incerta",
+        artifacts: 80,
+        site: "Piçarras - SC",
+        image: "fotos/santo_antonio_pcx.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-59",
+        name: "Itaipava I IAI 019",
+        coords: [-26.917, -48.667],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Encontra-se totalmente destruído",
+        artifacts: 45,
+        site: "Itajaí - SC",
+        image: "fotos/itaipava_i.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-60",
+        name: "Carvoeira PEN 004",
+        coords: [-26.767, -48.600],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Situa-se a 200 metros da costa",
+        artifacts: 70,
+        site: "Penha - SC",
+        image: "fotos/carvoeira_pen.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-61",
+        name: "Pereguê II PEB 007",
+        coords: [-27.150, -48.550],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Localiza-se a 100 metros da costa",
+        artifacts: 85,
+        site: "Porto Belo - SC",
+        image: "fotos/peregue_ii.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-62",
+        name: "Canhanduba IAI 018",
+        coords: [-26.917, -48.667],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Localiza-se numa pequena elevação",
+        artifacts: 65,
+        site: "Itajaí - SC",
+        image: "fotos/canhanduba.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-63",
+        name: "Areias de BBGG 004",
+        coords: [-27.500, -48.650],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Localiza-se ao fundo da baía",
+        artifacts: 75,
+        site: "Biguaçu - SC",
+        image: "fotos/areias_bbgg.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-64",
+        name: "Pereguê I PEB 006",
+        coords: [-27.150, -48.550],
+        type: "Sítio Lítico",
+        period: "Pré-colonial",
+        status: "Encontra-se arrasado",
+        artifacts: 55,
+        site: "Porto Belo - SC",
+        image: "fotos/peregue_i.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-65",
+        name: "Conjunto HBGC 001",
+        coords: [-27.500, -48.650],
+        type: "Sítio Múltiplo",
+        period: "Pré-colonial",
+        status: "Composto pelos vestígios de ocupação",
+        artifacts: 190,
+        site: "Biguaçu - SC",
+        image: "fotos/conjunto_hbgc.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-66",
+        name: "Rio Novo SMO 001",
+        coords: [-29.117, -49.800],
+        type: "Sítio Raso",
+        period: "Pré-colonial",
+        status: "Sítio raso, tipo 'sujo'",
+        artifacts: 110,
+        site: "Sombrio - SC",
+        image: "fotos/rio_novo_smo.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-67",
+        name: "Ponta do P LGA 021",
+        coords: [-28.483, -48.783],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sambaqui junto a embasamento rochoso",
+        artifacts: 230,
+        site: "Laguna - SC",
+        image: "fotos/ponta_p_lga21.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-68",
+        name: "Ponta do P LGA 022",
+        coords: [-28.483, -48.783],
+        type: "Sambaqui",
+        period: "Pré-colonial",
+        status: "Sítio localizado a 100m da costa",
+        artifacts: 210,
+        site: "Laguna - SC",
+        image: "fotos/ponta_p_lga22.jpg",
+        color: "#e74c3c"  // Sítio em Escavação
+    },
+    {
+        id: "vale-69",
+        name: "Estreito LGA 023",
+        coords: [-28.483, -48.783],
+        type: "Sambaqui",
+        period: 'Pré-colonial',
+        status: 'Sambaqui em região estreita',
+        artifacts: 195,
+        site: 'Laguna - SC',
+        image: 'fotos/estreito_lga.jpg',
+        color: '#e74c3c'  // Sítio em Escavação
+    }
+];
 
         // Inicialização do mapa principal
         function initializeMap() {
@@ -3008,12 +3008,12 @@ function applyFilters() {
 
         function getColorByType(type) {
             const colorMap = {
-                'Sítio em Escavação': '#ff0400',
-                'Sítio Documentado': '#0022ff',
-                'Área Protegida': '#00ff0d',
-                'Artefato Registrado': '#ffb52c',
-                'Estrutura Arqueológica': '#c800ff',
-                'Museus Arqueológicos': '#ffff00'
+                'Sítio em Escavação': '#e74c3c',
+                'Sítio Documentado': '#3498db',
+                'Área Protegida': '#2ecc71',
+                'Artefato Registrado': '#f39c12',
+                'Estrutura Arqueológica': '#9b59b6',
+                'Museus Arqueológicos': '#f1c40f'
             };
             return colorMap[type] || '#666666';
         }
