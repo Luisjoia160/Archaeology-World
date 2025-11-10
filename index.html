@@ -2549,8 +2549,8 @@
         status: "Sítio localizado a 100m da costa",
         artifacts: 210,
         site: "Laguna - SC",
-        image: "fotos/ponta_p_lga22.jpg",
-        color: "#e74c3c"  // Sítio em Escavação
+        image: 'fotos/ponta_p_lga22.jpg',
+        color: '#e74c3c'  // Sítio em Escavação
     },
     {
         id: "vale-69",
@@ -2621,37 +2621,36 @@
             return modalMap;
         }
 
-        // ===== FUNÇÕES DE FILTRO ===== //
         // ===== FUNÇÕES DE FILTRO OTIMIZADAS ===== //
-function applyFilters() {
-    const typeFilter = document.getElementById('filterType').value;
-    const periodFilter = document.getElementById('filterPeriod').value;
-    
-    // Otimização: Remover apenas marcadores visíveis
-    currentMarkers.forEach(marker => {
-        if (map.hasLayer(marker)) {
-            map.removeLayer(marker);
+        function applyFilters() {
+            const typeFilter = document.getElementById('filterType').value;
+            const periodFilter = document.getElementById('filterPeriod').value;
+            
+            // Otimização: Remover apenas marcadores visíveis
+            currentMarkers.forEach(marker => {
+                if (map.hasLayer(marker)) {
+                    map.removeLayer(marker);
+                }
+            });
+            
+            // Otimização: Reutilizar array em vez de criar novo
+            currentMarkers.length = 0;
+            
+            // Combinar todos os sites uma vez
+            const allSites = [...sites, ...userAddedSites];
+            
+            // Otimização: Filtrar e adicionar em uma única operação
+            allSites.forEach(site => {
+                const typeMatch = typeFilter === 'all' || site.type === typeFilter;
+                const periodMatch = periodFilter === 'all' || (site.period && site.period.includes(periodFilter));
+                
+                if (typeMatch && periodMatch) {
+                    addSiteToMap(site);
+                }
+            });
+            
+            showNotification('Filtros aplicados com sucesso!', 'success');
         }
-    });
-    
-    // Otimização: Reutilizar array em vez de criar novo
-    currentMarkers.length = 0;
-    
-    // Combinar todos os sites uma vez
-    const allSites = [...sites, ...userAddedSites];
-    
-    // Otimização: Filtrar e adicionar em uma única operação
-    allSites.forEach(site => {
-        const typeMatch = typeFilter === 'all' || site.type === typeFilter;
-        const periodMatch = periodFilter === 'all' || (site.period && site.period.includes(periodFilter));
-        
-        if (typeMatch && periodMatch) {
-            addSiteToMap(site);
-        }
-    });
-    
-    showNotification('Filtros aplicados com sucesso!', 'success');
-}
         
         function resetFilters() {
             document.getElementById('filterType').value = 'all';
@@ -3006,6 +3005,7 @@ function applyFilters() {
             showNotification('Sítio adicionado com sucesso!', 'success');
         });
 
+        // ===== FUNÇÃO getColorByType ATUALIZADA ===== //
         function getColorByType(type) {
             const colorMap = {
                 'Sítio em Escavação': '#e74c3c',
@@ -3013,69 +3013,92 @@ function applyFilters() {
                 'Área Protegida': '#2ecc71',
                 'Artefato Registrado': '#f39c12',
                 'Estrutura Arqueológica': '#9b59b6',
-                'Museus Arqueológicos': '#f1c40f'
+                'Museus Arqueológicos': '#f1c40f',
+                
+                // TIPOS ESPECÍFICOS DO VALE DO PARAÍBA - CORES CORRETAS
+                'Sítio de Coleta': '#e74c3c',           // Vermelho - Escavação
+                'Sítio Histórico': '#3498db',           // Azul - Documentado  
+                'Sítio Cerâmico': '#e74c3c',            // Vermelho - Escavação
+                'Sítio Lítico': '#e74c3c',              // Vermelho - Escavação
+                'Sítio Lítico-Cerâmico': '#e74c3c',     // Vermelho - Escavação
+                'Sítio Lito-Cerâmico': '#e74c3c',       // Vermelho - Escavação
+                'Sítio Pré-cerâmico': '#e74c3c',        // Vermelho - Escavação
+                'Sítio Raso': '#e74c3c',                // Vermelho - Escavação
+                'Sítio Múltiplo': '#e74c3c',            // Vermelho - Escavação
+                'Sítio de Ocupação': '#e74c3c',         // Vermelho - Escavação
+                'Sítio Funerário': '#3498db',           // Azul - Documentado
+                'Sítio de Ocupação Indígena': '#3498db',// Azul - Documentado
+                'Aldeia': '#e74c3c',                    // Vermelho - Escavação
+                'Acampamento': '#e74c3c',               // Vermelho - Escavação
+                'Oficina Lítica': '#f39c12',            // Laranja - Artefato
+                'Sambaqui': '#e74c3c',                  // Vermelho - Escavação
+                'Cemitério': '#e74c3c',                 // Vermelho - Escavação
+                'Abrigo sob Rocha': '#9b59b6',          // Roxo - Estrutura
+                'Abrigo com Arte Rupestre': '#9b59b6',  // Roxo - Estrutura
+                'Sítio com Arte Rupestre': '#9b59b6'    // Roxo - Estrutura
             };
             return colorMap[type] || '#666666';
         }
 
+        // ===== FUNÇÃO addSiteToMap CORRIGIDA ===== //
         function addSiteToMap(site) {
-    if (!map) {
-        console.error('Mapa não inicializado');
-        return;
-    }
+            if (!map) {
+                console.error('Mapa não inicializado');
+                return;
+            }
 
-    // Otimização: Cache de elementos DOM
-    const marker = L.circleMarker(site.coords, {
-        radius: Math.min(8 + (site.artifacts / 100), 20), // Limitar tamanho máximo
-        fillColor: site.color,
-        color: '#fff',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.8
-    }).addTo(map);
+            // USAR A COR DO MAPEAMENTO DE TIPOS EM VEZ DA COR FIXA
+            const siteColor = getColorByType(site.type);
+            
+            const marker = L.circleMarker(site.coords, {
+                radius: Math.min(8 + (site.artifacts / 100), 20), // Limitar tamanho máximo
+                fillColor: siteColor,
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map);
 
-    currentMarkers.push(marker);
+            currentMarkers.push(marker);
 
-    // Otimização: Template string mais eficiente
-    const buttonHtml = site.siteUrl ? 
-        `<button class="site-link-button" onclick="window.open('${site.siteUrl}', '_blank')">Visitar Site</button>` : '';
+            // Otimização: Template string mais eficiente
+            const buttonHtml = site.siteUrl ? 
+                `<button class="site-link-button" onclick="window.open('${site.siteUrl}', '_blank')">Visitar Site</button>` : '';
 
-    const popupContent = `
-        <div class="map-popup">
-            <h2>${site.name}</h2>
-            <img src="${site.image}" alt="${site.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200/2c5530/ffffff?text=Imagem+Não+Disponível'">
-            <div class="popup-meta">
-                <p><strong>Tipo:</strong> ${site.type}</p>
-                <p><strong>Período:</strong> ${site.period}</p>
-                <p><strong>Artefatos:</strong> ${site.artifacts}</p>
-                <p><strong>Status:</strong> ${site.status}</p>
-                ${site.description ? `<p><strong>Descrição:</strong> ${site.description}</p>` : ''}
-                ${buttonHtml}
-            </div>
-        </div>
-    `;
+            const popupContent = `
+                <div class="map-popup">
+                    <h2>${site.name}</h2>
+                    <img src="${site.image}" alt="${site.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200/2c5530/ffffff?text=Imagem+Não+Disponível'">
+                    <div class="popup-meta">
+                        <p><strong>Tipo:</strong> ${site.type}</p>
+                        <p><strong>Período:</strong> ${site.period}</p>
+                        <p><strong>Artefatos:</strong> ${site.artifacts}</p>
+                        <p><strong>Status:</strong> ${site.status}</p>
+                        ${site.description ? `<p><strong>Descrição:</strong> ${site.description}</p>` : ''}
+                        ${buttonHtml}
+                    </div>
+                </div>
+            `;
 
-    marker.bindPopup(popupContent);
-    
-    // Só abrir popup automaticamente para novos sites do usuário
-    if (site.id && site.id.startsWith('user-')) {
-        marker.openPopup();
-    }
+            marker.bindPopup(popupContent);
+            
+            // Só abrir popup automaticamente para novos sites do usuário
+            if (site.id && site.id.startsWith('user-')) {
+                marker.openPopup();
+            }
 
-    return site;
-}
-
-        function addUserSitesToMap() {
-            userAddedSites.forEach(site => {
-                addSiteToMap(site);
-            });
+            return site;
         }
 
+        // ===== FUNÇÃO addSitesToMap CORRIGIDA ===== //
         function addSitesToMap() {
             sites.forEach(site => {
+                // USAR A COR DO MAPEAMENTO DE TIPOS EM VEZ DA COR FIXA
+                const siteColor = getColorByType(site.type);
+                
                 const marker = L.circleMarker(site.coords, {
                     radius: 8 + (site.artifacts / 100),
-                    fillColor: site.color,
+                    fillColor: siteColor, // Usar a cor mapeada
                     color: '#fff',
                     weight: 2,
                     opacity: 1,
@@ -3104,6 +3127,12 @@ function applyFilters() {
                         </div>
                     </div>
                 `);
+            });
+        }
+
+        function addUserSitesToMap() {
+            userAddedSites.forEach(site => {
+                addSiteToMap(site);
             });
         }
 
@@ -3171,48 +3200,46 @@ function applyFilters() {
 
         // Inicializar o mapa quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
-    initializeMap();
-    checkUserLogin();
-    
-    // Smooth scroll otimizado
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+            initializeMap();
+            checkUserLogin();
+            
+            // Smooth scroll otimizado
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Fechar modal ao clicar fora
+            const addModal = document.getElementById('addModal');
+            if (addModal) {
+                addModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeAddModal();
+                    }
+                });
+            }
+
+            // Otimização: Delegação de eventos para inputs de coordenadas
+            const form = document.getElementById('addForm');
+            if (form) {
+                form.addEventListener('change', function(e) {
+                    if (e.target.id === 'itemLat' || e.target.id === 'itemLng') {
+                        updateMarkerFromCoordinates();
+                    }
                 });
             }
         });
-    });
-
-    // Fechar modal ao clicar fora
-    const addModal = document.getElementById('addModal');
-    if (addModal) {
-        addModal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAddModal();
-            }
-        });
-    }
-
-    // Otimização: Delegação de eventos para inputs de coordenadas
-    const form = document.getElementById('addForm');
-    if (form) {
-        form.addEventListener('change', function(e) {
-            if (e.target.id === 'itemLat' || e.target.id === 'itemLng') {
-                updateMarkerFromCoordinates();
-            }
-        });
-    }
-});
-
-
 
         function updateMarkerFromCoordinates() {
             const lat = parseFloat(document.getElementById('itemLat').value);
