@@ -1,0 +1,22 @@
+{
+  "name": "ArchaeologyWorld - Plataforma Arqueológica",
+  "short_name": "ArchaeWorld",
+  "description": "Plataforma profissional de arqueologia digital",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2c5530",
+  "theme_color": "#2c5530",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "fotos/b920f10b-c8ff-4e69-aeaf-515171ddf4ec.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "fotos/b920f10b-c8ff-4e69-aeaf-515171ddf4ec.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
