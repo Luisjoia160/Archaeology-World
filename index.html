@@ -43,7 +43,104 @@
             padding: 0;
             box-sizing: border-box;
         }
+        /* ===== Acessibilidade: tamanhos de fonte ===== */
+html {
+  font-size: 100%; /* base 16px, fácil de escalar com rem */
+}
 
+body {
+  /* você já tem fonte/cor aqui – só garanta o line-height confortável */
+  line-height: 1.6;
+}
+
+/* classes de tamanho relativas ao <body> */
+body.font-size-small {
+  font-size: 0.9rem;
+}
+
+body.font-size-normal {
+  font-size: 1rem;
+}
+
+body.font-size-large {
+  font-size: 1.15rem;
+}
+
+body.font-size-xlarge {
+  font-size: 1.3rem;
+}
+
+/* ===== Acessibilidade: alto contraste ===== */
+body.high-contrast {
+  background-color: #000;
+  color: #fff;
+}
+
+body.high-contrast a {
+  color: #ffeb3b;
+}
+
+body.high-contrast header,
+body.high-contrast .search-section,
+body.high-contrast .map-section,
+body.high-contrast .features-section,
+body.high-contrast .cta-section,
+body.high-contrast footer {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast .btn,
+body.high-contrast button,
+body.high-contrast .filter-btn {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+/* ===== Barra de acessibilidade fixa no topo ===== */
+.accessibility-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100; /* maior que o header */
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.25rem 0.75rem;
+  background-color: #222;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* empurrar o conteúdo pra baixo pra não ficar escondido */
+body {
+  padding-top: 2.5rem; /* ajuste fino se necessário */
+}
+
+.accessibility-toolbar .acc-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.accessibility-toolbar .acc-btn:hover,
+.accessibility-toolbar .acc-btn:focus-visible {
+  background-color: #fff;
+  color: #000;
+}
+
+/* ===== Foco visível global ===== */
+:focus-visible {
+  outline: 3px solid #ff9800;
+  outline-offset: 2px;
+}
         body {
             font-family: 'Raleway', sans-serif;
             line-height: 1.6;
@@ -6511,6 +6608,117 @@ function showLearningStats() {
     });
   }
         window.sites = sites;
+        // ===== SISTEMA DE ACESSIBILIDADE BÁSICO =====
+(function () {
+  const STORAGE_KEY = 'archaeologyworld-accessibility';
+
+  const defaultState = {
+    fontSize: 'normal', // small | normal | large | xlarge
+    highContrast: false
+  };
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { ...defaultState };
+      const parsed = JSON.parse(raw);
+      return { ...defaultState, ...parsed };
+    } catch (e) {
+      return { ...defaultState };
+    }
+  }
+
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // se der erro no storage (modo privado etc.), só ignora
+    }
+  }
+
+  function applyState(state) {
+    const body = document.body;
+
+    // limpa classes antigas
+    body.classList.remove(
+      'font-size-small',
+      'font-size-normal',
+      'font-size-large',
+      'font-size-xlarge',
+      'high-contrast'
+    );
+
+    // aplica tamanho de fonte
+    const sizeClass = {
+      small: 'font-size-small',
+      normal: 'font-size-normal',
+      large: 'font-size-large',
+      xlarge: 'font-size-xlarge'
+    }[state.fontSize] || 'font-size-normal';
+
+    body.classList.add(sizeClass);
+
+    // aplica contraste
+    if (state.highContrast) {
+      body.classList.add('high-contrast');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const state = loadState();
+    applyState(state);
+
+    const btnSkip = document.getElementById('acc-skip');
+    const btnIncrease = document.getElementById('acc-font-increase');
+    const btnDecrease = document.getElementById('acc-font-decrease');
+    const btnContrast = document.getElementById('acc-contrast-toggle');
+    const mainContent = document.getElementById('conteudo-principal');
+
+    // Skip link: vai direto pro conteúdo principal
+    if (btnSkip && mainContent) {
+      btnSkip.addEventListener('click', () => {
+        mainContent.focus();
+      });
+    }
+
+    // Aumentar fonte
+    if (btnIncrease) {
+      btnIncrease.addEventListener('click', () => {
+        const order = ['small', 'normal', 'large', 'xlarge'];
+        const currentIndex = order.indexOf(state.fontSize);
+        const nextIndex = Math.min(order.length - 1, currentIndex + 1);
+        state.fontSize = order[nextIndex];
+        applyState(state);
+        saveState(state);
+      });
+    }
+
+    // Diminuir fonte
+    if (btnDecrease) {
+      btnDecrease.addEventListener('click', () => {
+        const order = ['small', 'normal', 'large', 'xlarge'];
+        const currentIndex = order.indexOf(state.fontSize);
+        const nextIndex = Math.max(0, currentIndex - 1);
+        state.fontSize = order[nextIndex];
+        applyState(state);
+        saveState(state);
+      });
+    }
+
+    // Alternar alto contraste
+    if (btnContrast) {
+      btnContrast.setAttribute('aria-pressed', String(state.highContrast));
+
+      btnContrast.addEventListener('click', () => {
+        state.highContrast = !state.highContrast;
+        btnContrast.setAttribute('aria-pressed', String(state.highContrast));
+        applyState(state);
+        saveState(state);
+      });
+    }
+  });
+})();
+
     </script>
 </body>
 </html>
