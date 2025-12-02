@@ -43,14 +43,18 @@
             padding: 0;
             box-sizing: border-box;
         }
-        /* ===== Acessibilidade: tamanhos de fonte ===== */
+/* ===== Acessibilidade: tamanhos de fonte ===== */
 html {
   font-size: 100%; /* base 16px, fácil de escalar com rem */
 }
 
+/* body base (mantendo seu estilo original) */
 body {
-  /* você já tem fonte/cor aqui – só garanta o line-height confortável */
+  font-family: 'Raleway', sans-serif;
   line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+  padding-top: 3.3rem; /* espaço para barra + header fixos */
 }
 
 /* classes de tamanho relativas ao <body> */
@@ -104,36 +108,36 @@ body.high-contrast .filter-btn {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1100; /* maior que o header */
+  z-index: 1100; /* acima do header (1000) */
   display: flex;
   gap: 0.5rem;
   align-items: center;
   justify-content: flex-start;
-  padding: 0.25rem 0.75rem;
-  background-color: #222;
+  padding: 0.3rem 0.9rem;
+  background-color: #111;
   color: #fff;
   font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
-/* empurrar o conteúdo pra baixo pra não ficar escondido */
-body {
-  padding-top: 2.5rem; /* ajuste fino se necessário */
-}
-
+/* botões da barra */
 .accessibility-toolbar .acc-btn {
   background: transparent;
   border: 1px solid #fff;
   color: #fff;
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
 }
 
 .accessibility-toolbar .acc-btn:hover,
 .accessibility-toolbar .acc-btn:focus-visible {
   background-color: #fff;
   color: #000;
+  transform: translateY(-1px);
 }
 
 /* ===== Foco visível global ===== */
@@ -141,6 +145,7 @@ body {
   outline: 3px solid #ff9800;
   outline-offset: 2px;
 }
+
         body {
             font-family: 'Raleway', sans-serif;
             line-height: 1.6;
