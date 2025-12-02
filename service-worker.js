@@ -6,6 +6,7 @@ const CACHE_NAME = `archaeologyworld-${CACHE_VERSION}`;
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
+  '/login.hthml',
   '/project.css',
   '/manifest.json',
   '/fotos/b920f10b-c8ff-4e69-aeaf-515171ddf4ec.jpg'
