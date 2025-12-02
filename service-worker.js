@@ -5,7 +5,6 @@ const CACHE_NAME = `archaeologyworld-${CACHE_VERSION}`;
 // Arquivos básicos para funcionar offline
 const URLS_TO_CACHE = [
   '/',
-  '/index.html',
   '/project.css',
   '/server.js',
   '/manifest.json',
