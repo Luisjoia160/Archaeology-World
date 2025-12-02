@@ -45,45 +45,39 @@
         }
 /* ===== Acessibilidade: tamanhos de fonte ===== */
 html {
-  font-size: 100%; /* base 16px, fácil de escalar com rem */
+  font-size: 100%;
 }
 
-/* body base (mantendo seu estilo original) */
 body {
   font-family: 'Raleway', sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
-  padding-top: 3.3rem; /* espaço para barra + header fixos */
+  color: var(--text-color, #333);
+  background-color: var(--light-bg, #f8f9fa);
+  padding-top: 4.5rem; /* header fixo + pill de acessibilidade */
 }
 
-/* classes de tamanho relativas ao <body> */
+/* escala de fonte */
 body.font-size-small {
   font-size: 0.9rem;
 }
-
 body.font-size-normal {
   font-size: 1rem;
 }
-
 body.font-size-large {
   font-size: 1.15rem;
 }
-
 body.font-size-xlarge {
   font-size: 1.3rem;
 }
 
-/* ===== Acessibilidade: alto contraste ===== */
+/* ===== Alto contraste ===== */
 body.high-contrast {
   background-color: #000;
   color: #fff;
 }
-
 body.high-contrast a {
   color: #ffeb3b;
 }
-
 body.high-contrast header,
 body.high-contrast .search-section,
 body.high-contrast .map-section,
@@ -93,7 +87,6 @@ body.high-contrast footer {
   background-color: #000 !important;
   color: #fff !important;
 }
-
 body.high-contrast .btn,
 body.high-contrast button,
 body.high-contrast .filter-btn {
@@ -102,47 +95,68 @@ body.high-contrast .filter-btn {
   border: 2px solid #fff;
 }
 
-/* ===== Barra de acessibilidade fixa no topo ===== */
+/* ===== Barra/pill de acessibilidade minimalista ===== */
 .accessibility-toolbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1100; /* acima do header (1000) */
-  display: flex;
-  gap: 0.5rem;
+  top: 0.7rem;
+  right: 1.5rem;
+  z-index: 1100;
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0.3rem 0.9rem;
-  background-color: #111;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background-color: rgba(17, 17, 17, 0.85);
   color: #fff;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  font-size: 0.8rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
-/* botões da barra */
+/* esconder o texto em telas muito pequenas, opcional */
+@media (max-width: 480px) {
+  .accessibility-toolbar {
+    right: 0.75rem;
+    padding: 0.25rem 0.4rem;
+  }
+}
+
+/* botões minimalistas */
 .accessibility-toolbar .acc-btn {
   background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  padding: 0.25rem 0.7rem;
-  border-radius: 4px;
+  border: none;
+  color: inherit;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
+/* deixar o “Ir para o conteúdo” mais discreto, estilo label */
+.accessibility-toolbar #acc-skip {
+  padding-inline: 0.6rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* hover/focus */
 .accessibility-toolbar .acc-btn:hover,
 .accessibility-toolbar .acc-btn:focus-visible {
-  background-color: #fff;
+  background-color: #ffffff;
   color: #000;
   transform: translateY(-1px);
 }
 
 /* ===== Foco visível global ===== */
 :focus-visible {
-  outline: 3px solid #ff9800;
+  outline: 2px solid #ffb300;
   outline-offset: 2px;
 }
 
