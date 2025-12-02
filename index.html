@@ -1648,477 +1648,488 @@
     </style>
 </head>
 <body>
-    <!-- Notificações -->
-    <div id="notification" class="notification" style="display: none;"></div>
+  <!-- Notificações -->
+  <div id="notification" class="notification" style="display: none;"></div>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a class="logo">
-                <img src="fotos/b920f10b-c8ff-4e69-aeaf-515171ddf4ec.jpg" alt="Archaeology World Logo">
-                <div class="logo-text">Archaeology <span>World</span></div>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="#sobre">saiba mais</a></li>
-                    <li><a href="#search">Pesquisa</a></li>
-                    <li><a href="#map">Mapa Interativo</a></li>
-                    <li><a href="#features">Recursos</a></li>
-                    <li><a href="#stratigraphy">Estratigrafia</a></li>
-                    <li><a href="#data">Análises</a></li>
-                    <li id="addButtonContainer">
-                        <!-- Será preenchido dinamicamente via JavaScript -->
-                    </li>
-                    <li id="loginButtonContainer">
-                        <!-- Será preenchido dinamicamente via JavaScript -->
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- Barra de acessibilidade -->
+  <div class="accessibility-toolbar" aria-label="Opções de acessibilidade">
+    <button id="acc-skip" class="acc-btn">
+      Ir para o conteúdo
+    </button>
+    <button id="acc-font-increase" class="acc-btn" aria-label="Aumentar tamanho da fonte">
+      A+
+    </button>
+    <button id="acc-font-decrease" class="acc-btn" aria-label="Diminuir tamanho da fonte">
+      A-
+    </button>
+    <button id="acc-contrast-toggle" class="acc-btn" aria-pressed="false">
+      Alto contraste
+    </button>
+  </div>
 
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a class="logo">
+        <img src="fotos/b920f10b-c8ff-4e69-aeaf-515171ddf4ec.jpg" alt="Archaeology World Logo">
+        <div class="logo-text">Archaeology <span>World</span></div>
+      </a>
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li><a href="#sobre">saiba mais</a></li>
+          <li><a href="#search">Pesquisa</a></li>
+          <li><a href="#map">Mapa Interativo</a></li>
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#stratigraphy">Estratigrafia</a></li>
+          <li><a href="#data">Análises</a></li>
+          <li id="addButtonContainer"><!-- Preenchido via JS --></li>
+          <li id="loginButtonContainer"><!-- Preenchido via JS --></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL (alvo do skip-link) -->
+  <main id="conteudo-principal" role="main" tabindex="-1">
     <!-- Modal para Adicionar Novo Item -->
-    <div id="addModal" class="add-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Adicionar Novo Sítio/Descoberta</h2>
-                <button class="close-modal" onclick="closeAddModal()">&times;</button>
-            </div>
-            
-            <form id="addForm">
-                <div class="form-group">
-                    <label for="itemName">Nome do Local/Descoberta *</label>
-                    <input type="text" id="itemName" name="itemName" required placeholder="Ex: Sítio Arqueológico do Sol">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="itemType">Tipo *</label>
-                        <select id="itemType" name="itemType" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="Sítio em Escavação">Sítio em Escavação</option>
-                            <option value="Sítio Documentado">Sítio Documentado</option>
-                            <option value="Área Protegida">Área Protegida</option>
-                            <option value="Artefato Registrado">Artefato Registrado</option>
-                            <option value="Estrutura Arqueológica">Estrutura Arqueológica</option>
-                            <option value="Museus Arqueológicos">Museu Arqueológico</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="itemPeriod">Período *</label>
-                        <input type="text" id="itemPeriod" name="itemPeriod" required placeholder="Ex: Holoceno Inicial">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Localização *</label>
-                    <div class="map-controls">
-                        <button type="button" onclick="enableMapSelection()">
-                            <i class="fas fa-mouse-pointer"></i> Clicar no Mapa
-                        </button>
-                        <button type="button" onclick="useCurrentLocation()">
-                            <i class="fas fa-location-arrow"></i> Minha Localização
-                        </button>
-                    </div>
-                    
-                    <div class="modal-map-container">
-                        <div id="modalMap"></div>
-                    </div>
-                    
-                    <div class="coordinates-info" id="coordinatesInfo">
-                        Clique em "Clicar no Mapa" e depois clique no mapa para selecionar a localização
-                    </div>
-                    
-                    <div class="form-row coordinates-input">
-                        <div class="form-group">
-                            <label for="itemLat">Latitude *</label>
-                            <input type="number" id="itemLat" name="itemLat" required step="any" placeholder="Ex: -15.7942" min="-90" max="90">
-                        </div>
-                        <div class="form-group">
-                            <label for="itemLng">Longitude *</label>
-                            <input type="number" id="itemLng" name="itemLng" required step="any" placeholder="Ex: -47.8822" min="-180" max="180">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemDescription">Descrição</label>
-                    <textarea id="itemDescription" name="itemDescription" placeholder="Descreva o sítio, descoberta ou informações relevantes..."></textarea>
-                </div>
-
-                <!-- ÁREA MODIFICADA: Upload de arquivo funcionando -->
-                <div class="form-group">
-                    <label>Imagem do Local</label>
-                    
-                    <div class="upload-options">
-                        <div class="upload-option active" onclick="setImageSource('file')">
-                            <i class="fas fa-upload"></i> Upload do Computador
-                        </div>
-                        <div class="upload-option" onclick="setImageSource('url')">
-                            <i class="fas fa-link"></i> URL da Imagem
-                        </div>
-                    </div>
-                    
-                    <div id="fileUploadContainer">
-                        <div class="file-upload-container">
-                            <div class="file-input-wrapper">
-                                <input type="file" id="itemImageFile" name="itemImageFile" accept="image/*" class="file-input" onchange="handleFileSelect(event)">
-                                <label for="itemImageFile" class="file-input-button">
-                                    <i class="fas fa-cloud-upload-alt"></i> Escolher Arquivo
-                                </label>
-                            </div>
-                            <div class="file-name" id="fileName">Nenhum arquivo selecionado</div>
-                            <img id="imagePreview" class="image-preview" src="" alt="Pré-visualização">
-                        </div>
-                    </div>
-                    
-                    <div id="urlInputContainer" style="display: none;">
-                        <input type="url" id="itemImageUrl" name="itemImageUrl" placeholder="https://exemplo.com/imagem.jpg">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemSiteUrl">URL do Site (opcional)</label>
-                    <input type="url" id="itemSiteUrl" name="itemSiteUrl" placeholder="https://exemplo.com">
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="submitBtn">Adicionar ao Mapa</button>
-                </div>
-            </form>
+    <div id="addModal" class="add-modal" aria-hidden="true" aria-labelledby="addModalTitle" role="dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="addModalTitle">Adicionar Novo Sítio/Descoberta</h2>
+          <button class="close-modal" onclick="closeAddModal()" aria-label="Fechar formulário de novo sítio">&times;</button>
         </div>
+
+        <form id="addForm">
+          <div class="form-group">
+            <label for="itemName">Nome do Local/Descoberta *</label>
+            <input type="text" id="itemName" name="itemName" required placeholder="Ex: Sítio Arqueológico do Sol">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemType">Tipo *</label>
+              <select id="itemType" name="itemType" required>
+                <option value="">Selecione o tipo</option>
+                <option value="Sítio em Escavação">Sítio em Escavação</option>
+                <option value="Sítio Documentado">Sítio Documentado</option>
+                <option value="Área Protegida">Área Protegida</option>
+                <option value="Artefato Registrado">Artefato Registrado</option>
+                <option value="Estrutura Arqueológica">Estrutura Arqueológica</option>
+                <option value="Museus Arqueológicos">Museu Arqueológico</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="itemPeriod">Período *</label>
+              <input type="text" id="itemPeriod" name="itemPeriod" required placeholder="Ex: Holoceno Inicial">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Localização *</label>
+            <div class="map-controls">
+              <button type="button" onclick="enableMapSelection()">
+                <i class="fas fa-mouse-pointer" aria-hidden="true"></i> Clicar no Mapa
+              </button>
+              <button type="button" onclick="useCurrentLocation()">
+                <i class="fas fa-location-arrow" aria-hidden="true"></i> Minha Localização
+              </button>
+            </div>
+
+            <div class="modal-map-container">
+              <div id="modalMap" aria-label="Mapa para selecionar localização do novo sítio"></div>
+            </div>
+
+            <div class="coordinates-info" id="coordinatesInfo">
+              Clique em "Clicar no Mapa" e depois clique no mapa para selecionar a localização
+            </div>
+
+            <div class="form-row coordinates-input">
+              <div class="form-group">
+                <label for="itemLat">Latitude *</label>
+                <input type="number" id="itemLat" name="itemLat" required step="any" placeholder="Ex: -15.7942" min="-90" max="90">
+              </div>
+              <div class="form-group">
+                <label for="itemLng">Longitude *</label>
+                <input type="number" id="itemLng" name="itemLng" required step="any" placeholder="Ex: -47.8822" min="-180" max="180">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="itemDescription">Descrição</label>
+            <textarea id="itemDescription" name="itemDescription" placeholder="Descreva o sítio, descoberta ou informações relevantes..."></textarea>
+          </div>
+
+          <!-- Upload de imagem -->
+          <div class="form-group">
+            <label>Imagem do Local</label>
+
+            <div class="upload-options">
+              <div class="upload-option active" onclick="setImageSource('file')">
+                <i class="fas fa-upload" aria-hidden="true"></i> Upload do Computador
+              </div>
+              <div class="upload-option" onclick="setImageSource('url')">
+                <i class="fas fa-link" aria-hidden="true"></i> URL da Imagem
+              </div>
+            </div>
+
+            <div id="fileUploadContainer">
+              <div class="file-upload-container">
+                <div class="file-input-wrapper">
+                  <input type="file" id="itemImageFile" name="itemImageFile" accept="image/*" class="file-input" onchange="handleFileSelect(event)">
+                  <label for="itemImageFile" class="file-input-button">
+                    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i> Escolher Arquivo
+                  </label>
+                </div>
+                <div class="file-name" id="fileName">Nenhum arquivo selecionado</div>
+                <img id="imagePreview" class="image-preview" src="" alt="Pré-visualização da imagem selecionada">
+              </div>
+            </div>
+
+            <div id="urlInputContainer" style="display: none;">
+              <input type="url" id="itemImageUrl" name="itemImageUrl" placeholder="https://exemplo.com/imagem.jpg">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="itemSiteUrl">URL do Site (opcional)</label>
+            <input type="url" id="itemSiteUrl" name="itemSiteUrl" placeholder="https://exemplo.com">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Adicionar ao Mapa</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Seção de Pesquisa -->
-    <section id="search" class="search-section">
-        <div class="container search-container">
-            <h1 class="search-title">Pesquisa Arqueológica Inteligente</h1>
-            <p class="search-subtitle">Explore milhares de sítios, artefatos, museus e informações arqueológicas</p>
-            
-            <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar arqueologia, sítios, artefatos, períodos...">
-                <button class="search-button" id="searchButton">
-                    <i class="fas fa-search"></i>
-                </button>
-                <div class="search-suggestions" id="searchSuggestions"></div>
-            </div>
-            
-            <div class="search-examples">
-                Exemplos: 
-                <span onclick="fillSearch('Serra da Capivara')">Serra da Capivara</span> • 
-                <span onclick="fillSearch('Luzia')">Luzia</span> • 
-                <span onclick="fillSearch('Sambaqui')">Sambaqui</span> • 
-                <span onclick="fillSearch('Museu de Arqueologia')">Museu de Arqueologia</span>
-            </div>
+    <section id="search" class="search-section" aria-labelledby="search-title">
+      <div class="container search-container">
+        <h1 class="search-title" id="search-title">Pesquisa Arqueológica Inteligente</h1>
+        <p class="search-subtitle">Explore milhares de sítios, artefatos, museus e informações arqueológicas</p>
 
-            <div class="search-advanced">
-                <div class="search-advanced-toggle" onclick="toggleAdvancedSearch()">
-                    <i class="fas fa-sliders-h"></i> Opções avançadas
-                    <i class="fas fa-chevron-down" id="advancedToggleIcon"></i>
-                </div>
-                <div class="search-advanced-options" id="advancedOptions">
-                    <div class="form-row">
-                        <div class="search-advanced-group">
-                            <label for="searchType">Tipo de conteúdo</label>
-                            <select id="searchType">
-                                <option value="all">Todos os tipos</option>
-                                <option value="sites">Sítios Arqueológicos</option>
-                                <option value="artifacts">Artefatos</option>
-                                <option value="museums">Museus</option>
-                                <option value="structures">Estruturas</option>
-                                <option value="areas">Áreas Protegidas</option>
-                            </select>
-                        </div>
-                        <div class="search-advanced-group">
-                            <label for="searchPeriod">Período</label>
-                            <select id="searchPeriod">
-                                <option value="all">Todos os períodos</option>
-                                <option value="Pleistoceno">Pleistoceno</option>
-                                <option value="Holoceno">Holoceno</option>
-                                <option value="Pré-colonial">Pré-colonial</option>
-                                <option value="Colonial">Colonial</option>
-                                <option value="Contemporâneo">Contemporâneo</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="search-advanced-group">
-                        <label for="searchRegion">Região</label>
-                        <select id="searchRegion">
-                            <option value="all">Todas as regiões</option>
-                            <option value="Norte">Norte</option>
-                            <option value="Nordeste">Nordeste</option>
-                            <option value="Centro-Oeste">Centro-Oeste</option>
-                            <option value="Sudeste">Sudeste</option>
-                            <option value="Sul">Sul</option>
-                            <option value="Internacional">Internacional</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+        <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar arqueologia, sítios, artefatos, períodos..." aria-label="Pesquisar conteúdo arqueológico">
+          <button class="search-button" id="searchButton" aria-label="Executar pesquisa">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+          <div class="search-suggestions" id="searchSuggestions"></div>
         </div>
+
+        <div class="search-examples" aria-label="Sugestões de pesquisa">
+          Exemplos:
+          <span onclick="fillSearch('Serra da Capivara')">Serra da Capivara</span> •
+          <span onclick="fillSearch('Luzia')">Luzia</span> •
+          <span onclick="fillSearch('Sambaqui')">Sambaqui</span> •
+          <span onclick="fillSearch('Museu de Arqueologia')">Museu de Arqueologia</span>
+        </div>
+
+        <div class="search-advanced">
+          <div class="search-advanced-toggle" onclick="toggleAdvancedSearch()" role="button" tabindex="0" aria-expanded="false" aria-controls="advancedOptions">
+            <i class="fas fa-sliders-h" aria-hidden="true"></i> Opções avançadas
+            <i class="fas fa-chevron-down" id="advancedToggleIcon" aria-hidden="true"></i>
+          </div>
+          <div class="search-advanced-options" id="advancedOptions" hidden>
+            <div class="form-row">
+              <div class="search-advanced-group">
+                <label for="searchType">Tipo de conteúdo</label>
+                <select id="searchType">
+                  <option value="all">Todos os tipos</option>
+                  <option value="sites">Sítios Arqueológicos</option>
+                  <option value="artifacts">Artefatos</option>
+                  <option value="museums">Museus</option>
+                  <option value="structures">Estruturas</option>
+                  <option value="areas">Áreas Protegidas</option>
+                </select>
+              </div>
+              <div class="search-advanced-group">
+                <label for="searchPeriod">Período</label>
+                <select id="searchPeriod">
+                  <option value="all">Todos os períodos</option>
+                  <option value="Pleistoceno">Pleistoceno</option>
+                  <option value="Holoceno">Holoceno</option>
+                  <option value="Pré-colonial">Pré-colonial</option>
+                  <option value="Colonial">Colonial</option>
+                  <option value="Contemporâneo">Contemporâneo</option>
+                </select>
+              </div>
+            </div>
+            <div class="search-advanced-group">
+              <label for="searchRegion">Região</label>
+              <select id="searchRegion">
+                <option value="all">Todas as regiões</option>
+                <option value="Norte">Norte</option>
+                <option value="Nordeste">Nordeste</option>
+                <option value="Centro-Oeste">Centro-Oeste</option>
+                <option value="Sudeste">Sudeste</option>
+                <option value="Sul">Sul</option>
+                <option value="Internacional">Internacional</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Resultados da Pesquisa -->
-    <section class="search-results" id="searchResults">
-        <div class="container">
-            <div class="results-header">
-                <div class="results-count" id="resultsCount">0 resultados encontrados</div>
-                <div class="results-filters">
-                    <div class="filter-option active" data-filter="all">Todos</div>
-                    <div class="filter-option" data-filter="sites">Sítios</div>
-                    <div class="filter-option" data-filter="artifacts">Artefatos</div>
-                    <div class="filter-option" data-filter="museums">Museus</div>
-                    <div class="filter-option" data-filter="structures">Estruturas</div>
-                    <div class="filter-option" data-filter="areas">Áreas</div>
-                </div>
-            </div>
-
-            <!-- Resumo Inteligente -->
-            <div id="intelligentSummary" class="intelligent-summary" style="display: none;">
-                <div class="summary-header">
-                    <i class="fas fa-brain"></i>
-                    <h2>Resumo Inteligente</h2>
-                </div>
-                <div class="summary-content" id="summaryContent">
-                    <!-- O resumo será gerado aqui automaticamente -->
-                </div>
-                <div class="summary-sources">
-                    <h4>Fontes consultadas:</h4>
-                    <div class="sources-list" id="summarySources">
-                        <!-- Fontes serão adicionadas aqui -->
-                    </div>
-                </div>
-                <div class="summary-tags" id="summaryTags">
-                    <!-- Tags serão adicionadas aqui -->
-                </div>
-            </div>
-
-            <div class="search-stats" id="searchStats"></div>
-            
-            <div class="search-sort">
-                <label for="sortResults">Ordenar por:</label>
-                <select id="sortResults" onchange="sortResults()">
-                    <option value="relevance">Relevância</option>
-                    <option value="name">Nome (A-Z)</option>
-                    <option value="name-desc">Nome (Z-A)</option>
-                    <option value="artifacts">Número de artefatos</option>
-                    <option value="period">Período</option>
-                </select>
-            </div>
-            
-            <div class="results-container" id="resultsContainer">
-                <!-- Os resultados serão inseridos aqui via JavaScript -->
-            </div>
-
-            <div class="pagination" id="pagination"></div>
+    <section class="search-results" id="searchResults" aria-label="Resultados da pesquisa">
+      <div class="container">
+        <div class="results-header">
+          <div class="results-count" id="resultsCount">0 resultados encontrados</div>
+          <div class="results-filters" aria-label="Filtros de tipo de resultado">
+            <div class="filter-option active" data-filter="all" tabindex="0">Todos</div>
+            <div class="filter-option" data-filter="sites" tabindex="0">Sítios</div>
+            <div class="filter-option" data-filter="artifacts" tabindex="0">Artefatos</div>
+            <div class="filter-option" data-filter="museums" tabindex="0">Museus</div>
+            <div class="filter-option" data-filter="structures" tabindex="0">Estruturas</div>
+            <div class="filter-option" data-filter="areas" tabindex="0">Áreas</div>
+          </div>
         </div>
+
+        <!-- Resumo Inteligente -->
+        <div id="intelligentSummary" class="intelligent-summary" style="display: none;">
+          <div class="summary-header">
+            <i class="fas fa-brain" aria-hidden="true"></i>
+            <h2>Resumo Inteligente</h2>
+          </div>
+          <div class="summary-content" id="summaryContent"></div>
+          <div class="summary-sources">
+            <h4>Fontes consultadas:</h4>
+            <div class="sources-list" id="summarySources"></div>
+          </div>
+          <div class="summary-tags" id="summaryTags"></div>
+        </div>
+
+        <div class="search-stats" id="searchStats"></div>
+
+        <div class="search-sort">
+          <label for="sortResults">Ordenar por:</label>
+          <select id="sortResults" onchange="sortResults()">
+            <option value="relevance">Relevância</option>
+            <option value="name">Nome (A-Z)</option>
+            <option value="name-desc">Nome (Z-A)</option>
+            <option value="artifacts">Número de artefatos</option>
+            <option value="period">Período</option>
+          </select>
+        </div>
+
+        <div class="results-container" id="resultsContainer"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
     </section>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container hero-content">
-            <h1>Revolucionando a Pesquisa Arqueológica com Tecnologia</h1>
-            <p>Integração avançada de sistemas geoespaciais, documentação digital e análise de dados para arqueologia do século XXI</p>
-            <div class="hero-buttons">
-                <a href="#map" class="btn btn-primary">Explorar Plataforma</a>
-                <a href="#features" class="btn btn-secondary">Ver Recursos</a>
-            </div>
+      <div class="container hero-content">
+        <h1>Revolucionando a Pesquisa Arqueológica com Tecnologia</h1>
+        <p>Integração avançada de sistemas geoespaciais, documentação digital e análise de dados para arqueologia do século XXI</p>
+        <div class="hero-buttons">
+          <a href="#map" class="btn btn-primary">Explorar Plataforma</a>
+          <a href="#features" class="btn btn-secondary">Ver Recursos</a>
         </div>
+      </div>
     </section>
 
     <!-- Seção Sobre -->
     <section id="sobre" class="saiba-mais-sobre">
-        <div class="container">
-            <h1>O que é arqueologia?</h1>
-            <p>A Arqueologia é a ciência que estuda o passado humano, tanto antigo quanto recente, através da análise de vestígios materiais como objetos, ferramentas, construções e fósseis. Ela busca compreender as culturas e os modos de vida das populações antigas, utilizando trabalho de campo (escavações), análise laboratorial de materiais e divulgação do conhecimento produzido.</p>
-        </div>
+      <div class="container">
+        <h1>O que é arqueologia?</h1>
+        <p>A Arqueologia é a ciência que estuda o passado humano, tanto antigo quanto recente, através da análise de vestígios materiais como objetos, ferramentas, construções e fósseis. Ela busca compreender as culturas e os modos de vida das populações antigas, utilizando trabalho de campo (escavações), análise laboratorial de materiais e divulgação do conhecimento produzido.</p>
+      </div>
     </section>
 
     <!-- Seção do Mapa Interativo -->
-    <section id="map" class="map-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Mapa Arqueológico Interativo</h2>
-                <p class="section-subtitle">Visualize, analise e documente sítios arqueológicos em tempo real com nossa plataforma geoespacial integrada</p>
-            </div>
-            
-            <div class="map-container">
-                <div id="archaeologicalMap"></div>
-                
-                <!-- Filtros do Mapa - POSICIONAMENTO CORRIGIDO -->
-                <div class="map-filters">
-                    <div class="filter-header">
-                      <h3><i class="fas fa-filter"></i> Filtros</h3>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="filterType">Tipo de Sítio</label>
-                        <select id="filterType">
-                            <option value="all">Todos os Tipos</option>
-                            <option value="Sítio em Escavação">Sítio em Escavação</option>
-                            <option value="Sítio Documentado">Sítio Documentado</option>
-                            <option value="Área Protegida">Área Protegida</option>
-                            <option value="Artefato Registrado">Artefato Registrado</option>
-                            <option value="Estrutura Arqueológica">Estrutura Arqueológica</option>
-                            <option value="Museus Arqueológicos">Museu Arqueológico</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="filterPeriod">Período</label>
-                        <select id="filterPeriod">
-                            <option value="all">Todos os Períodos</option>
-                            <option value="Pleistoceno">Pleistoceno</option>
-                            <option value="Holoceno">Holoceno</option>
-                            <option value="Pré-colonial">Pré-colonial</option>
-                            <option value="Colonial">Colonial</option>
-                            <option value="Contemporâneo">Contemporâneo</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-actions">
-                        <button class="filter-btn" onclick="applyFilters()">Aplicar Filtros</button>
-                        <button class="filter-btn secondary" onclick="resetFilters()">Limpar</button>
-                    </div>
-                </div>
-                
-                <!-- Legenda do Mapa - POSICIONAMENTO CORRIGIDO -->
-                <div class="map-overlay">
-                    <div class="legend-header">
-                      <h3><i class="fas fa-layer-group"></i> Legenda do Mapa</h3>
-                      <button class="toggle-button" onclick="toggleLegend()">-</button>
-                    </div>
-
-                    <div class="map-legend" id="legendContent">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #e74c3c;"></div>
-                            <span>Sítio em Escavação</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #3498db;"></div>
-                            <span>Sítio Documentado</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #2ecc71;"></div>
-                            <span>Área Protegida</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #f39c12;"></div>
-                            <span>Artefato Registrado</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #9b59b6;"></div>
-                            <span>Estrutura Arqueológica</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background-color: #f1c40f;"></div>
-                            <span>Museus Arqueológicos</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section id="map" class="map-section" aria-labelledby="map-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" id="map-title">Mapa Arqueológico Interativo</h2>
+          <p class="section-subtitle">Visualize, analise e documente sítios arqueológicos em tempo real com nossa plataforma geoespacial integrada</p>
         </div>
+
+        <div class="map-container">
+          <div
+            id="archaeologicalMap"
+            role="region"
+            aria-label="Mapa arqueológico interativo com localização de sítios"
+          ></div>
+
+          <!-- Filtros do Mapa -->
+          <div class="map-filters" aria-label="Filtros do mapa">
+            <div class="filter-header">
+              <h3><i class="fas fa-filter" aria-hidden="true"></i> Filtros</h3>
+            </div>
+
+            <div class="filter-group">
+              <label for="filterType">Tipo de Sítio</label>
+              <select id="filterType">
+                <option value="all">Todos os Tipos</option>
+                <option value="Sítio em Escavação">Sítio em Escavação</option>
+                <option value="Sítio Documentado">Sítio Documentado</option>
+                <option value="Área Protegida">Área Protegida</option>
+                <option value="Artefato Registrado">Artefato Registrado</option>
+                <option value="Estrutura Arqueológica">Estrutura Arqueológica</option>
+                <option value="Museus Arqueológicos">Museu Arqueológico</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="filterPeriod">Período</label>
+              <select id="filterPeriod">
+                <option value="all">Todos os Períodos</option>
+                <option value="Pleistoceno">Pleistoceno</option>
+                <option value="Holoceno">Holoceno</option>
+                <option value="Pré-colonial">Pré-colonial</option>
+                <option value="Colonial">Colonial</option>
+                <option value="Contemporâneo">Contemporâneo</option>
+              </select>
+            </div>
+
+            <div class="filter-actions">
+              <button class="filter-btn" onclick="applyFilters()">Aplicar Filtros</button>
+              <button class="filter-btn secondary" onclick="resetFilters()">Limpar</button>
+            </div>
+          </div>
+
+          <!-- Legenda do Mapa -->
+          <div class="map-overlay" aria-label="Legenda do mapa">
+            <div class="legend-header">
+              <h3><i class="fas fa-layer-group" aria-hidden="true"></i> Legenda do Mapa</h3>
+              <button class="toggle-button" onclick="toggleLegend()" aria-controls="legendContent" aria-expanded="true">-</button>
+            </div>
+
+            <div class="map-legend" id="legendContent">
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #e74c3c;"></div>
+                <span>Sítio em Escavação</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #3498db;"></div>
+                <span>Sítio Documentado</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #2ecc71;"></div>
+                <span>Área Protegida</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #f39c12;"></div>
+                <span>Artefato Registrado</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #9b59b6;"></div>
+                <span>Estrutura Arqueológica</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color" style="background-color: #f1c40f;"></div>
+                <span>Museus Arqueológicos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Seção de Recursos -->
     <section id="features" class="features-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Tecnologia Arqueológica Avançada</h2>
-                <p class="section-subtitle">Ferramentas especializadas desenvolvidas para pesquisadores e equipes de campo</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Georreferenciamento</h3>
-                    <p>Precisão centimétrica no registro de coordenadas com integração de receptores GNSS de alta qualidade.</p>
-                    <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <h3>Gestão Estratigráfica</h3>
-                    <p>Documentação automatizada de camadas com registro fotográfico e descritivo.</p>
-                    <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Banco de Dados Integrado</h3>
-                    <p>Armazenamento seguro e organização inteligente de todos os dados arqueológicos.</p>
-                    <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Pesquisa Inteligente</h3>
-                    <p>Busca avançada com informações de fontes confiáveis e resumos automáticos.</p>
-                    <a href="#search" class="feature-link">Testar agora <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Tecnologia Arqueológica Avançada</h2>
+          <p class="section-subtitle">Ferramentas especializadas desenvolvidas para pesquisadores e equipes de campo</p>
         </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+            </div>
+            <h3>Georreferenciamento</h3>
+            <p>Precisão centimétrica no registro de coordenadas com integração de receptores GNSS de alta qualidade.</p>
+            <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-layer-group" aria-hidden="true"></i>
+            </div>
+            <h3>Gestão Estratigráfica</h3>
+            <p>Documentação automatizada de camadas com registro fotográfico e descritivo.</p>
+            <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-database" aria-hidden="true"></i>
+            </div>
+            <h3>Banco de Dados Integrado</h3>
+            <p>Armazenamento seguro e organização inteligente de todos os dados arqueológicos.</p>
+            <a href="#" class="feature-link">Saiba mais <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </div>
+            <h3>Pesquisa Inteligente</h3>
+            <p>Busca avançada com informações de fontes confiáveis e resumos automáticos.</p>
+            <a href="#search" class="feature-link">Testar agora <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Seção CTA -->
     <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 style="margin-bottom: 1rem;">Pronto para revolucionar sua pesquisa arqueológica?</h2>
-                <p style="margin-bottom: 2rem;">Junte-se a centenas de pesquisadores que já utilizam nossa plataforma para documentação, análise e gestão de dados arqueológicos.</p>
-                <a href="#contact" class="btn btn-primary">Solicitar Demonstração</a>
-            </div>
+      <div class="container">
+        <div class="cta-content">
+          <h2 style="margin-bottom: 1rem;">Pronto para revolucionar sua pesquisa arqueológica?</h2>
+          <p style="margin-bottom: 2rem;">Junte-se a centenas de pesquisadores que já utilizam nossa plataforma para documentação, análise e gestão de dados arqueológicos.</p>
+          <a href="#contact" class="btn btn-primary">Solicitar Demonstração</a>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-about">
-                    <h3>Archaeology World</h3>
-                    <p>Soluções tecnológicas avançadas para pesquisa e gestão do patrimônio arqueológico. Integrando conhecimento tradicional com inovação digital.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-researchgate"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column footer-links">
-                    <h3>Recursos</h3>
-                    <ul>
-                        <li><a href="#">Documentação Técnica</a></li>
-                        <li><a href="#">Tutoriais em Vídeo</a></li>
-                        <li><a href="#">Banco de Dados Público</a></li>
-                        <li><a href="#">Publicações Científicas</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column footer-contact">
-                    <h3>Contato</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Arqueologia, 123 - Centro</p>
-                    <p><i class="fas fa-phone"></i> (11) 98765-4321</p>
-                    <p><i class="fas fa-envelope"></i> contato.archaeologyworld@gmail.com</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Archaeology World. Todos os direitos reservados.</p>
-                <p>Desenvolvido com paixão pela arqueologia e tecnologia.</p>
-            </div>
+  <!-- Footer -->
+  <footer id="contact" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <h3>Archaeology World</h3>
+          <p>Soluções tecnológicas avançadas para pesquisa e gestão do patrimônio arqueológico. Integrando conhecimento tradicional com inovação digital.</p>
+          <div class="footer-social" aria-label="Redes sociais da Archaeology World">
+            <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a>
+            <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
+            <a href="#"><i class="fab fa-researchgate" aria-hidden="true"></i><span class="sr-only">ResearchGate</span></a>
+            <a href="#"><i class="fab fa-youtube" aria-hidden="true"></i><span class="sr-only">YouTube</span></a>
+          </div>
         </div>
-    </footer>
+
+        <div class="footer-column footer-links">
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="#">Documentação Técnica</a></li>
+            <li><a href="#">Tutoriais em Vídeo</a></li>
+            <li><a href="#">Banco de Dados Público</a></li>
+            <li><a href="#">Publicações Científicas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column footer-contact">
+          <h3>Contato</h3>
+          <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Av. Arqueologia, 123 - Centro</p>
+          <p><i class="fas fa-phone" aria-hidden="true"></i> (11) 98765-4321</p>
+          <p><i class="fas fa-envelope" aria-hidden="true"></i> contato.archaeologyworld@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Archaeology World. Todos os direitos reservados.</p>
+        <p>Desenvolvido com paixão pela arqueologia e tecnologia.</p>
+      </div>
+    </div>
+  </footer>
+
 
     <script src="/lib/leaflet/leaflet.js"></script>
     <script>
