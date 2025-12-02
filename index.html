@@ -6622,7 +6622,7 @@ function showLearningStats() {
     });
   }
         window.sites = sites;
-        // ===== SISTEMA DE ACESSIBILIDADE BÁSICO =====
+// ===== SISTEMA DE ACESSIBILIDADE BÁSICO =====
 (function () {
   const STORAGE_KEY = 'archaeologyworld-accessibility';
 
@@ -6653,7 +6653,13 @@ function showLearningStats() {
   function applyState(state) {
     const body = document.body;
 
-    // limpa classes antigas
+    // garante valor válido
+    const validSizes = ['small', 'normal', 'large', 'xlarge'];
+    if (!validSizes.includes(state.fontSize)) {
+      state.fontSize = 'normal';
+    }
+
+    // remove classes antigas
     body.classList.remove(
       'font-size-small',
       'font-size-normal',
@@ -6663,13 +6669,14 @@ function showLearningStats() {
     );
 
     // aplica tamanho de fonte
-    const sizeClass = {
+    const sizeClassMap = {
       small: 'font-size-small',
       normal: 'font-size-normal',
       large: 'font-size-large',
       xlarge: 'font-size-xlarge'
-    }[state.fontSize] || 'font-size-normal';
+    };
 
+    const sizeClass = sizeClassMap[state.fontSize] || 'font-size-normal';
     body.classList.add(sizeClass);
 
     // aplica contraste
@@ -6688,6 +6695,16 @@ function showLearningStats() {
     const btnContrast = document.getElementById('acc-contrast-toggle');
     const mainContent = document.getElementById('conteudo-principal');
 
+    const sizeOrder = ['small', 'normal', 'large', 'xlarge'];
+
+    function updateSizeTooltip() {
+      if (btnIncrease) {
+        btnIncrease.title = `Tamanho atual: ${state.fontSize}`;
+      }
+    }
+
+    updateSizeTooltip();
+
     // Skip link: vai direto pro conteúdo principal
     if (btnSkip && mainContent) {
       btnSkip.addEventListener('click', () => {
@@ -6698,24 +6715,24 @@ function showLearningStats() {
     // Aumentar fonte
     if (btnIncrease) {
       btnIncrease.addEventListener('click', () => {
-        const order = ['small', 'normal', 'large', 'xlarge'];
-        const currentIndex = order.indexOf(state.fontSize);
-        const nextIndex = Math.min(order.length - 1, currentIndex + 1);
-        state.fontSize = order[nextIndex];
+        const currentIndex = sizeOrder.indexOf(state.fontSize);
+        const nextIndex = Math.min(sizeOrder.length - 1, currentIndex + 1);
+        state.fontSize = sizeOrder[nextIndex];
         applyState(state);
         saveState(state);
+        updateSizeTooltip();
       });
     }
 
     // Diminuir fonte
     if (btnDecrease) {
       btnDecrease.addEventListener('click', () => {
-        const order = ['small', 'normal', 'large', 'xlarge'];
-        const currentIndex = order.indexOf(state.fontSize);
+        const currentIndex = sizeOrder.indexOf(state.fontSize);
         const nextIndex = Math.max(0, currentIndex - 1);
-        state.fontSize = order[nextIndex];
+        state.fontSize = sizeOrder[nextIndex];
         applyState(state);
         saveState(state);
+        updateSizeTooltip();
       });
     }
 
