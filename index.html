@@ -24,6 +24,9 @@
     <!-- Otimização: Carregamento otimizado das fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" 
           rel="stylesheet">
+          <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2c5530">
+
     
     <style>
         :root {
@@ -2122,6 +2125,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
+    
       // ===== SISTEMA DE APRENDIZADO POR REFORÇO (APRIMORADO) ===== //
 class SimpleReinforcementLearning {
     constructor() {
@@ -6487,6 +6491,18 @@ function showLearningStats() {
                 image: 'fotos/sitio-arqueologico-montes-claros.jpg'
             }
         ];
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(reg => {
+          console.log('Service Worker registrado com escopo:', reg.scope);
+        })
+        .catch(err => {
+          console.error('Falha ao registrar Service Worker:', err);
+        });
+    });
+  }
         window.sites = sites;
     </script>
 </body>

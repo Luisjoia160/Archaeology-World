@@ -43,14 +43,22 @@ const upload = multer({
   }
 });
 
+app.get('/', (req, res) => {
+  const filePath = path.join(__dirname, 'index.html');
+  console.log('Enviando index:', filePath);
+  res.sendFile(filePath);
+});
+
 // Rota de teste
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Backend do Archaeology World funcionando!',
-    status: '✅ Online',
-    upload: 'Use POST /upload para enviar imagens'
-  });
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// Se quiser manter o JSON de teste:
+app.get('/status', (req, res) => {
+  res.json({ message: 'Backend do Archaeology World funcionando!', status: '✅ Online' });
+});
+
 
 // Rota para upload de imagens
 app.post('/upload', upload.single('imagem'), (req, res) => {
